@@ -52,7 +52,9 @@ ws.onmessage = e => {
     return;
   }
   addChat(obj.id, obj.message); 
-  sendChat();
+  if ( obj.message == "サーバーに接続しました。") {
+    sendChat();
+  }
   
 }
 // WS切断
