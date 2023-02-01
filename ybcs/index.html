@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja" >
+  <head>
+    <meta charset="UTF-8">
+    <title>不適切放送通報SIS</title>
+    <link rel="icon" type="image/ico" href="./favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- partial:index.partial.html -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@500&family=M+PLUS+2:wght@300;400&family=Noto+Sans+JP&family=Zen+Kaku+Gothic+New:wght@500&display=swap" rel="stylesheet">
+    <script>
+            (()=>{
+            // ゼロ埋めして2桁の数値にする
+            const zero = n => (n < 10 ) ? "0" + n.toString() : n.toString();
+ 
+            // 日付の文字列化
+            const youbi = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            const getDateString = date =>
+                `${ date.getFullYear() }/ ${ zero(date.getMonth() + 1) }/  ${ zero(date.getDate()) }/ ${ youbi[date.getDay()] }`;
+ 
+            // 時間の文字列化
+            const getHourString = date =>
+                `${ zero(date.getHours()) }: ${ zero(date.getMinutes()) }: ${ zero(date.getSeconds()) }`;
+ 
+            // DOMの構築を待つ
+            window.addEventListener('DOMContentLoaded',()=> {
+                // 日時を表示するDOM要素を取得
+                const dateDiv = document.getElementById("date");
+                const clockDiv = document.getElementById("clock");
+ 
+                // 現在の日
+                let nowDate = null;
+ 
+                // 1秒周期のタイマーセット
+                setInterval( ()=>{
+                    // 現在の日時を取得
+                    const now = new Date();
+                    // 日付が変わったら日付を再表示
+                    if( nowDate !== now.getDate() ) {
+                        nowDate = now.getDate();
+                        dateDiv.innerText = getDateString(now);
+                    }
+ 
+                    // 時間を再表示
+                    clockDiv.innerText = getHourString(now);
+                },1000);
+            });
+})();
+
+    </script>
+  </head>
+  <body>
+    <section class="section">
+<p class="is-size-4 has-text-weight-medium bc">不適切放送通報システム</p>
+     <div class="zikan">
+      <div id="date"></div>
+     <div id="clock"></div>
+     </div>
+      <div id="si">
+
+          <center> 
+     <div id="id" style="width:100%;border:solid 1px #FFFFFF;"></div>
+     不適切放送を<br/>
+      <a class="button has-background-danger has-text-white is-size-4" id="send" type="button" href="./tu.html">
+通報する
+      </a></center>
+     <hr/>
+     <div class="setu">
+     <p>「<b>通報する</b>」を押してください。</p>
+     </div>
+</div>
+      <div class="sub yoko">
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+      <script>
+
+</script>
+      <!-- partial -->
+      <script>
+ window.addEventListener("keydown", handleKeydown);
+
+function handleKeydown(event){
+  // キーコード(どのキーが押されたか)を取得
+  var keyCode = event.keyCode;
+  // 条件文で制御する
+  if (keyCode == 13) {
+   sendChat();
+  }
+
+}
+</script>
+    </section>
+   <footer class="footer">
+  <div class="content has-text-centered">
+    <nav class="level">
+      <div class="level-item has-text-centered">
+        <a href="siyou.html">
+          仕様書・設計書等
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a href="riyou.html">
+          利用規約・免責事項
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a href="seisaku.html">
+          作成者たち
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a href="iken.html">
+          ご意見・ご要望
+        </a>
+      </div>
+    </nav>
+    <div>
+©相模原市立弥栄中学校放送委員会 <br>All rights reserved.</div>
+  </div>
+</footer>
+          <script>
+        var si = document.getElementById("si");
+
+      if (window.navigator.onLine) {
+  console.log("online");
+} else {
+  console.log("offline");
+    si.innerHTML = '<p class="maru"><b>インターネットに接続されていません。接続して、再読込してください。。</b></p>';
+
+}
+      </script>
+  </body>
+</html>
