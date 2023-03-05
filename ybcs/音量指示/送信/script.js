@@ -15,6 +15,8 @@ let url = new URL(window.location.href);// URLを取得
   console.log(params.get('pw')); // ID
   pw = params.get('pw');
   console.log(pw); // idのタグ
+var chaturl = 'https://hamatakuyaei.github.io/ybcs/chat/index.html?id=%E9%80%81%E4%BF%A1%E5%81%B4&room=' + room + '&pw=' + pw;
+document.getElementById('if').setAttribute('src', chaturl);
 
 //タイムアウト後に実行する関数
 function sleep(ms) {
