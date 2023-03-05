@@ -113,3 +113,7 @@ var getDateTime = function() {
   var sec = toDoubleDigits(date.getSeconds());
   return year + '/' + month + '/' + day + ' ' + hour + ':' + min + ':' + sec;
 };
+window.onload = function() {
+   // 実行したい処理
+sendChat('読み込み完了');
+}
