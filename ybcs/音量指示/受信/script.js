@@ -36,7 +36,8 @@ let url = new URL(window.location.href);// URLを取得
   console.log(params.get('pw')); // ID
   pw = params.get('pw');
   console.log(pw); // idのタグ
-
+var chaturl = 'https://hamatakuyaei.github.io/ybcs/chat/index.html?id=体育館放送室（音響チーム）msg&room=' + room + '&pw=' + pw;
+document.getElementById('if').setAttribute('src', chaturl);
 // チャット
 function addChat(id, msg){
  if( msg =='up'){
