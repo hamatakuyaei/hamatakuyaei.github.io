@@ -1,0 +1,37 @@
+@font-face {
+  /*フォントの名前*/
+  font-family: "CorporateLogo";
+  /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
+  src: url("https://hamatakuyaei.github.io/font/Corporate-Logo-Medium-ver3.woff") format("woff");
+}
+
+body {
+font-family: 'BIZ UDPGothic', sans-serif;
+}
+
+.lg {
+  font-family: "CorporateLogo";
+  color: #000;
+}
+
+
+
+.hu {
+ padding: 10px;
+ border-radius: 5px;
+ background: #f00;
+ margin: 5px;
+ color: #fff;
+ font-weight: bold;
+font-size: 150%;
+}
+#koubunnerawokakutokoro {
+ color: #000;
+}
+
+.kakusu {
+ display: none;
+}
+
+.zikkoukekka {
+}
