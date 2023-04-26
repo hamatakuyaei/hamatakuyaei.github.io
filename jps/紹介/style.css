@@ -1,0 +1,152 @@
+@font-face {
+  /*フォントの名前*/
+  font-family: "smartphoneui";
+  /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
+  src: url("https://hamatakuyaei.github.io/font/03スマートフォントUI.woff") format("woff");
+}
+
+@font-face {
+  /*フォントの名前*/
+  font-family: "CorporateLogo";
+  /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
+  src: url("https://hamatakuyaei.github.io/font/Corporate-Logo-Medium-ver3.woff") format("woff");
+}
+
+body {
+  font-family: smartphoneui;
+}
+
+h1 {
+    font-family: CorporateLogo;
+}
+
+.midasi {
+  position: relative;
+  padding: 1rem .5rem;
+}
+
+.midasi:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  content: '';
+  border-radius: 3px;
+  background-image: -webkit-gradient(linear, right top, left top, from(#2af598), to(#009efd));
+  background-image: -webkit-linear-gradient(right, #2af598 0%, #009efd 100%);
+  background-image: linear-gradient(to left, #2af598 0%, #009efd 100%);
+}
+
+/* ここから */
+.mv {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+ 
+/* 全体を囲う要素 */
+.mv-wrap {
+  /* 背景画像の高さ */
+}
+ 
+video {
+  width: 95%;
+}
+
+.design8-profile-wrap {
+    margin: 0;
+    padding: 0;
+    border: solid 1px #a0a0a0;
+    max-width: 350px;
+    margin: 0 auto;
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+}
+.design8-profile-wrap::before {
+    content: "";
+    display: block;
+    width: 75%;
+    height: 70%;
+    background: #fff2c3;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+}
+.design8-profile_icon::after {
+    content: "JpS team";
+    font-size: 60px;
+    font-weight: bold;
+    font-family: "Arial", "Arial black";
+    line-height: 1;
+    color: rgba(0,0,0,.15);
+    position: absolute;
+    top: -60px;
+    left: -11px;
+    transform: rotate(90deg);
+    transform-origin: left bottom;
+    z-index: 3;
+}
+.design8-icon-link {
+    color: #555!important;
+    text-decoration: none;
+}
+.design8-icon-link:hover {
+    color: #555!important;
+}
+.design8-profile_icon {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    position: relative;
+    z-index: 2;
+}
+.design8-profile_icon img {
+    width: 83%;
+    height: auto;
+}
+.design8-name {
+    position: relative;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.5;
+    z-index: 2;
+}
+.design8-profile-body {
+    padding: 0 1em;
+    position: relative;
+}
+.design8-profile-body p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+.design8-text-center {
+    text-align: center;
+    margin-bottom: 1em;
+}
+.design8-follow-btn-container {
+    position: relative;
+    z-index: 3;
+}
+.design8-about-link {
+    display: inline-block;
+    color: #ffffff!important;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    padding: .5em 1em;
+    background: #383838;
+    border-radius: 30px;
+    box-shadow: 0 4px 5px -5px rgba(0, 0, 0, .5);
+    transition: .3s;
+}
+.design8-about-link:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .1), 0 10px 20px -10px rgba(0, 0, 0, .25);
+}
+
