@@ -1,4 +1,4 @@
-var gazobango = '0';
+var gazobango = 0;
 var bef = '0';
 var nex = '0';
 var mes = 0;
@@ -60,8 +60,8 @@ function addChat(id, msg){
       if (msg == 'sendtest') {
   } else if (msg == 'Login'){
     		ima.innerHTML = 'コントロールパネルに接続しました。表示されるまで少しお待ち下さい。'
-    		ima.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/Login.png" style="width: 100vw;">';
-    gazobango = 0;
+    		sendauto(gazobango);
+    		chat.innerHTML = gazobango
   } else if (id == 'con') {
         mes = Number(msg);
 		ima.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/' + msg + '.png">';
@@ -100,8 +100,17 @@ var getDateTime = function() {
 
 function before() {
  sendauto(mes - 1); 
+  gazobango = (mes - 1);
 }
 
 function next() {
  sendauto(mes + 1); 
+    gazobango = (mes + 1);
 }
+
+
+function setudanbosi() {
+sendauto('sendtest');
+}
+
+setInterval(setudanbosi , 10000);
