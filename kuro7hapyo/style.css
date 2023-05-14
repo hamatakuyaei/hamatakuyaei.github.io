@@ -253,3 +253,8 @@ display: none;
  color: #000;
 
 }
+
+.tyui {
+position:fixed;	
+bottom: 0px;
+}
