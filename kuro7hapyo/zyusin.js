@@ -5,6 +5,8 @@ var myID = params.get('id');
 console.log(myID); // idのタグ
 var room = 'Kurokimusicschool';
 var pw = 'kuroki';
+var setudan = '';
+var _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 var chat = document.getElementById("chat");
 // ID生成
@@ -58,8 +60,11 @@ function sendChat(msg) {
 }
 // チャット
 function addChat(id, msg) {
+  if (msg == 'setudankansi') {
+    setudan = 'ok';
+  }
     if (msg == 'sendtest') {
-    sendChat('sendtest OK!! onlin! このメッセージは、切断防止用兼用です。');
+    sendChat('sendtest OK!! online! このメッセージは、切断防止用兼用です。');
   } else if (msg == 'Login' && id == 'con'){
     		chat.innerHTML = 'コントロールパネルに接続しました。表示されるまで少しお待ち下さい。'
     		chat.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/Login.png" style="width: 100vw;">';
@@ -101,4 +106,18 @@ function oreda() {
 sendauto(yamin);
 }
 
+
+
+async function offline() {
+ sendChat('setudankansi');
+await _sleep(1000);
+  if (setudan == 'ok'){
+  console.log('online');
+  } else {
+  chat.innerHTML = '<h1 class="title">オフラインです。再読み込みしてください.</h1>'
+    window.location.reload
+  }
+}
+
 setInterval(oreda, 1000);
+setInterval(offline, 3000);
