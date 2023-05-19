@@ -12,6 +12,9 @@ var ima = document.getElementById("ima");
 var tugi = document.getElementById("tugi");
 var mae = document.getElementById("mae");
 
+var setudan = '';
+var _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 // ID生成
 let id = myID;
 document.getElementById("id").innerHTML = 'ID : ' + id;
