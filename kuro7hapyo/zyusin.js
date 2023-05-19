@@ -69,7 +69,7 @@ function addChat(id, msg) {
     		chat.innerHTML = 'コントロールパネルに接続しました。表示されるまで少しお待ち下さい。'
     		chat.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/Login.png" style="width: 100vw;">';
   } else if (id == 'con') {
-		chat.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/' + msg + '.png?ver=' + getDateTime + '">';
+		chat.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/' + msg + '.png?ver=' + getDateTime() + '">';
 		sendChat("img OK.");
 	} else {
       console.log('a');
