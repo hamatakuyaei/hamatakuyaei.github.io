@@ -101,10 +101,7 @@ var getDateTime = function() {
 
 
 var yamin = 0;
-function oreda() {
-  yamin = yamin + 1;
-sendauto(yamin);
-}
+
 
 
 
