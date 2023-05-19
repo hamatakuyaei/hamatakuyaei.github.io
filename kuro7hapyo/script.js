@@ -64,11 +64,11 @@ function addChat(id, msg){
     		chat.innerHTML = gazobango
   } else if (id == 'con') {
         mes = Number(msg);
-		ima.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/' + msg + '.png">';
+		ima.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/' + msg + '.png?ver=' + getDateTime + '">';
 	        bef = (Number(msg) - 1);	
-    		mae.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/' + bef + '.png">';
+    		mae.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/' + bef + '.png?ver=' + getDateTime + '">';
     		nex = (Number(msg) + 1);
-    		tugi.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/' + nex + '.png">';
+    		tugi.innerHTML = '<img src="https://hamatakuyaei.github.io/kuro7hapyo/img/' + nex + '.png?ver=' + getDateTime + '">';
         chat.innerHTML = gazobango + chat.innerHTML;
 	} else {
       console.log('a');
