@@ -54,4 +54,12 @@
   "place": "0",
   "tax": "0",
   "maker": "Hamataku."
+  },
+  {
+  "jancode": "9364267897923",
+  "name": "100円値引き",
+  "namehuri": "ひゃくえんねびき。",
+  "place": "-100",
+  "tax": "1",
+  "maker": "Hamataku."
   }]
