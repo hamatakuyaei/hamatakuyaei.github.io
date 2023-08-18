@@ -60,6 +60,6 @@
   "name": "100円値引き",
   "namehuri": "ひゃくえんねびき。",
   "place": "-100",
-  "tax": "-100",
+  "tax": "100",
   "maker": "Hamataku."
   }]
