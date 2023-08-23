@@ -62,4 +62,12 @@
   "place": "-50",
   "tax": "100",
   "maker": "Hamataku."
+  },
+  {
+  "jancode": "1924381000000",
+  "name": "国語教科書",
+  "namehuri": "こくごきょうかしょ。",
+  "place": "10000",
+  "tax": "10",
+  "maker": "Hamataku."
   }]
