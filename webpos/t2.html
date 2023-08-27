@@ -1,0 +1,34 @@
+<body>
+
+  lorem
+    <div id="interactive" class="viewport"></div>
+    <div id="kekka"></div>
+  jjj
+  <script type="text/javascript" src="https://serratus.github.io/quaggaJS/examples/js/quagga.min.js"></script>
+  <script>
+            alert('Aaa');
+
+      Quagga.init({
+        inputStream: { type : 'LiveStream' },
+          decoder: {
+            readers: [{
+              format: 'ean_reader',
+              config: {}
+            }]
+          }
+        }, (err) => {
+          if(!err) {
+            Quagga.start();
+          }
+        });
+  
+      Quagga.onDetected((result) => {
+        var code = result.codeResult.code;
+        // ここでコードを受け取って、何かしらの処理(例えば、楽天市場APIを使用して商品検索等)
+      //  alert(code);
+        document.getElementById('kekka').innerHTML += '<br>' + code;
+    });
+    </script>
+  </body>
+
+  

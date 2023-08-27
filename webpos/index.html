@@ -1,0 +1,300 @@
+<!--
+  -------------------オープンソースライセンス一覧-------------------
+  -------------------CSSフレームワーク〈Bulma〉MITライセンス-------------------
+  Code copyright 2016 Jeremy Thomas
+  Code released under the MIT license
+  https://opensource.org/licenses/mit-license.php
+
+  -------------------バーコード読み取りライブラリ〈quagga〉MITライセンス-------------------
+-->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <meta http-equiv="Cache-Control" content="no-cache">
+
+  <title>BURAUZA POS</title>
+  <link rel="icon" type="image/png" href="./favicon.png?3" sizes="16x16 24x24 32x32 48x48 64x64" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&family=BIZ+UDPGothic:wght@700&family=Nanum+Gothic+Coding:wght@400;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+    rel="stylesheet">
+
+  <!--
+    <script src="https://unpkg.com/@ericblade/quagga2@1.7.4/dist/quagga.min.js"></script>
+    <script type="text/javascript" src="https://serratus.github.io/quaggaJS/examples/js/quagga.min.js"></script>
+  -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+  <link rel="stylesheet" href="./bulma/css/bulma.min.css">
+  <link rel="stylesheet" href="./modal.css">
+  <script src="./quagga/unpkgquagga.min.js"></script>
+  <script src="./quagga/githubquagga.min.js"></script>
+  <script src="./quagga/howler.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+  <section class="section">
+    <div class="columns">
+      <div class="column">
+        <article class="message is-link">
+          <div class="message-header">
+            <p id="yomitorityu">読み取り中。カメラにバーコードをかざしてください。</p>
+          </div>
+          <div class="message-body">
+            <div id="interactive" class="viewport"></div>
+          </div>
+        </article>
+      </div>
+      <div class="column is-7">
+        <article class="message">
+          <div class="message-header">
+            <p>読み取り結果</p>
+          </div>
+          <div class="message-body">
+            <div class="" id="hitotume"></div>
+            <div class="kotei">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>商品名</th>
+                    <th>本体価格</th>
+                    <th>税込み価格</th>
+                    <th>JANCODE</th>
+                    <th>削除</th>
+                  </tr>
+                </thead>
+                <tbody id="kekka">
+
+                </tbody>
+              </table>
+            </div>
+            <div id="naka"></div>
+            <button onclick="mplay('samecode')" class="button">おとてすと</button>
+            <button onclick="janimput()" class="button">jan認証</button>
+            <button onclick="kuriyomitori('0000000000000','camera')" class="button">テスト商品</button>
+            <button onclick="yomitori('4957812561075')" class="button">テスト商品</button>
+            <button onclick="yomitori('4957812561075')" class="button">値引き</button>
+            <br>
+            <div class="column">
+              <button class="button is-size-4	is-danger is-outlined"
+                onclick="modalOpen('torihikityuusikakunin'),mplay('tyuusikakunin')">取引中止</button>
+              <button onclick=" kokei()" class="button is-size-4	 is-link">小計</button>
+              <a onclick="uriagesakuzyo('0')" class="button">テスト</a>
+              <a onclick="uriagesakuzyo('1')"><span class="material-symbols-outlined">delete</span></a>
+            </div>
+          </div>
+        </article>
+        <div id="douitukakunnin"></div>
+        <div id="akasatanahana"></div>
+      </div>
+    </div>
+    <nav class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">合計点数</p>
+          <p class="title" id="goukeitensuu">0</p>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">合計金額</p>
+          <p class="title" id="goukeikingaku">123</p>
+        </div>
+      </div>
+    </nav>
+  </section>
+  <!--モーダルウインドウ開始-->
+  <!--jan未発見開始-->
+  <div id="notfound" class="modalNoDisp">
+    <div class="modalWindowerror">
+      <p class="has-text-danger">エラー</p>
+      <hr />
+      <p>このコードの商品が見つかりませんでした。</p>
+      <a onclick="modalClose('notfound')" class="close">
+        <span class="material-symbols-outlined">disabled_by_default</span>
+      </a>
+    </div>
+  </div>
+  <!--jan未発見終了-->
+  <!--小計の結果-->
+  <div id="syoukeikekka" class="modalNoDisp">
+    <dialog class="dialog" id="syousaikekka_dl">
+      <div class="modalWindowsyoukei">
+        <p class="has-text-link is-size-3">決済入力</p>
+        <hr />
+        <section class="section">
+          <div class="syoukeizenntaityuuou">
+            <div class="columns">
+              <div class="column">
+                <div class="tyuuou">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <th>点数</th>
+                        <th id="kaikei-sougou-tensuu">10</th>
+                      </tr>
+                      <tr>
+                        <th>小計</th>
+                        <th id="kaikei-sougou-syoukei">10000</th>
+                      </tr>
+                      <tr>
+                        <th>値引き</th>
+                        <th id="kaikei-sougou-nebiki">0</th>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr class="has-background-success-dark">
+                        <th class=" has-text-white-bis">合計</th>
+                        <th class="has-text-white-bis" id="kaikei-sougou-goukei">100000</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+              <div class="column">
+                <div class="tyuuou">
+                  <table class="table">
+                    <tbody>
+                      <tr class="has-background-success-dark">
+                        <th class=" has-text-white-bis">合計</th>
+                        <th class=" has-text-white-bis" id="kaikei-kessai-goukei">10000</th>
+                      </tr>
+                      <tr>
+                        <th>クーポン等値引き</th>
+                        <th>
+                          <input class="input" type="number" id="kaikei-kessai-kupon" onkeyup="kokei()"
+                            placeholder="クーポン等の値引き額を入力してください。">
+                        </th>
+                      </tr>
+                      <tr class="has-background-link-light	">
+                        <th>お預かり</th>
+                        <th id="autofc">
+                          <input id="kaikei_kessai_oazukari" class="input inputA" type="number" onkeyup="kokei()"
+                            placeholder="お預かりした現金の価格を入力してください。" autofocus>
+                        </th>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr class="has-background-warning-light	">
+                        <th>お釣り</th>
+                        <th id="kaikei-kessai-oturi">0</th>
+                      </tr>
+
+                    </tfoot>
+                  </table>
+                  お預かり入力用キーボード
+                  <div class="simple-keyboard"></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <center>
+            <button class="button is-outlined is-large" onclick="kaikeimodoru()">戻る</button>
+            <button class="button is-link is-large" onclick="kaikeikettei()">決済決定</button>
+          </center>
+        </section>
+        <a onclick="modalClose('syoukeikekka')" class="close">
+          <span class="material-symbols-outlined">disabled_by_default</span>
+        </a>
+      </div>
+    </dialog>
+
+  </div>
+  <!--小計の結果終了-->
+  <!--決済決定確認画面開始-->
+  <div id="kessaikakunin" class="modalNoDisp">
+    <div class="modalWindowkessaikakunin">
+      <p class="has-text-danger">確認</p>
+      <hr />
+      <p class="is-size-5">以下の結果を確認し、<strong>お客様にお釣りと商品を渡し</strong>、決済終了ボタンを押してください。</p>
+      <hr />
+      <div class="has-text-centered">
+        <center>
+          <table class="table saisyutable">
+            <tbody>
+              <tr>
+                <th>お預かり</th>
+                <th id="kessaichack-oazukari">0000</th>
+              </tr>
+              <tr>
+                <th>合計請求金額</th>
+                <th id="kessaichack-goukei">0000</th>
+              </tr>
+              <tr class="has-background-info-dark">
+                <th class="has-text-white-bis	">お釣り</th>
+                <th class="has-text-white-bis	" id="kessaichack-oturi">0000</th>
+              </tr>
+            </tbody>
+          </table>
+          <div class="mb-4">
+            <button class="button is-medium" onclick="modalClose('kessaikakunin')">戻る</button>
+            <button class="button is-medium is-danger is-outlined"
+              onclick="modalOpen('torihikityuusikakunin'),mplay('tyuusikakunin')">取引中止</button>
+            <button class="button is-medium is-link">決済完了</button>
+          </div>
+
+        </center>
+      </div>
+
+      <a onclick="modalClose('kessaikakunin')" class="close">
+        <span class="material-symbols-outlined">disabled_by_default</span>
+      </a>
+    </div>
+  </div>
+  <!--決済決定確認画面終了-->
+  <!--取引中止確認開始-->
+  <div id="torihikityuusikakunin" class="modalNoDisp">
+    <div class="modalWindow_torihikikakunin">
+      <p class="has-text-danger">確認</p>
+      <hr />
+      <div class="modalWindow_torihikikakunin_nakami">
+        <p class="is-size-5">取引を中止しますか？<br />この取引を中止すると、この取引の売上登録がキャンセルされます。</p>
+        <button class="button is-medium is-danger" onclick="torihikiyuusi()">はい。取引を中止します。</button>
+        <button class="button is-medium is-link is-outlined"
+          onclick="modalClose('torihikityuusikakunin')">いいえ。戻ります。</button>
+      </div>
+      <a onclick="modalClose('torihikityuusikakunin')" class="close">
+        <span class="material-symbols-outlined">disabled_by_default</span>
+      </a>
+    </div>
+  </div>
+  <!--取引中止確認終了-->
+  <!--モーダルウインドウ終了-->
+  <!--
+<div class="yoteif">
+    <p class="is-size-5 sinkoumozi">進行状況</p>
+    <div class="yotei" id="yotei">１０分遅れ</div>
+</div>
+</div>
+<div class="naiyou">
+</div>
+-->
+  <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+
+  <script src="./script.js"></script>
+  <script src="./swbord.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!--
+  -------------------オープンソースライセンス一覧-------------------
+  -------------------CSSフレームワーク〈Bulma〉MITライセンス-------------------
+  Code copyright 2016 Jeremy Thomas
+  Code released under the MIT license
+  https://opensource.org/licenses/mit-license.php
+
+  -------------------バーコード読み取りライブラリ〈quagga〉MITライセンス-------------------
+-->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>決済入力UIBURAUZA POS</title>
+    <link rel="icon" type="image/png" href="./favicon.png?3" sizes="16x16 24x24 32x32 48x48 64x64" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Nanum+Gothic+Coding:wght@400;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <!--
+    <script src="https://unpkg.com/@ericblade/quagga2@1.7.4/dist/quagga.min.js"></script>
+    <script type="text/javascript" src="https://serratus.github.io/quaggaJS/examples/js/quagga.min.js"></script>
+  -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="./modal.css">
+    <script src="./quagga/unpkgquagga.min.js"></script>
+    <script src="./quagga/githubquagga.min.js"></script>
+    <script src="./quagga/howler.min.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="syoukeizenntaityuuou">
+            <div class="columns">
+                <div class="column">
+                    <div class="tyuuou">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>点数</th>
+                                    <th id="kaikeitensuu">10</th>
+                                </tr>
+                                <tr>
+                                    <th>小計</th>
+                                    <th id="kaikeisyoukei">10000</th>
+                                </tr>
+                                <tr>
+                                    <th>値引き</th>
+                                    <th id="kaikeisyoukei">0</th>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <th>合計</th>
+                                <th>100000</th>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="tyuuou">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>合計</th>
+                                    <th>10000</th>
+                                </tr>
+                                <tr>
+                                    <th>お預かり</th>
+                                    <th><input class="input" type="number" placeholder="お預かりした現金の価格を入力してください。"> </th>
+                                </tr>
+                                <tr>
+                                    <th>クーポン等値引き</th>
+                                    <th><input class="input" type="number" placeholder="クーポン等の値引き額を入力してください。"> </th>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>お釣り</th>
+                                    <th>0</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <center>
+        <button class="button is-outlined is-large">戻る</button>
+        <button class="button is-link is-large">決済決定</button>
+        </center>
+    </section>
+</body>
+
+
+</html>
