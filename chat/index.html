@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Connector-Chatsystem</title>
+  <title>Chat-system</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,6 +65,7 @@
       <span class="material-symbols-outlined" onclick="modalOpen('st')">add_reaction</span>
       <span class="material-symbols-outlined" onclick="modalOpen('modalArea')">settings</span>
       <span class="material-symbols-outlined" onclick="modalOpen('roomcheck')">settings</span>
+      <span class="material-symbols-outlined" onclick="modalOpen('kyouyu')">ios_share</span>
     </div>
 
     <!-- モーダルウインドウのエリア -->
@@ -147,6 +148,21 @@
         <a onclick="modalClose('modalArea')" class="close">
           <span class="material-symbols-outlined">disabled_by_default</span>
         </a>
+      </div>
+    </div>
+    <div id="kyouyu" class="modalNoDisp">
+      <div class="modalWindow">
+        <!-- ここがウインドウとなります -->
+        <p class="mot">共有</p>
+        <hr>
+        <div class="stmp">
+          <p>共有</p>
+          <div id="qrsh"></div>
+
+          <a onclick="modalClose('kyouyu')" class="close">
+            <span class="material-symbols-outlined">disabled_by_default</span>
+          </a>
+        </div>
       </div>
     </div>
 
