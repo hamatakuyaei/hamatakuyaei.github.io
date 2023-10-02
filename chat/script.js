@@ -24,10 +24,11 @@ var myID = params.get('id');
 var room = params.get('room');
 var pw = params.get('pw');
 var id = params.get('id');
+let kyouyuuyouurl = `https://hamatakuyaei.github.io/chat/index.html?room=${room}&pw=${pw}`
 document.getElementById('roomid').value = room;
 document.getElementById('hyouziid').value = id;
 document.getElementById('pwid').value = params.get('pw');
-
+document.getElementById('qrsh').innerHTML = `<img src="https://chart.apis.google.com/chart?cht=qr&choe=UTF-8&chs=200&chl=${encodeURI(kyouyuuyouurl)}" alt="共有用QRコード">`
 function irsettei() {
   room = document.getElementById('roomid').value;
   id = document.getElementById('hyouziid').value;
