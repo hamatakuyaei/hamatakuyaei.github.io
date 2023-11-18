@@ -1,6 +1,6 @@
 @font-face {
   /*フォントの名前*/
-  font-family: "smartphoneui";
+  font-family: "03スマートフォントUI";
   /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
   src: url("https://hamatakuyaei.github.io/font/03スマートフォントUI.woff") format("woff");
 }
@@ -8,28 +8,28 @@
 
 @font-face {
   /*フォントの名前*/
-  font-family: "bokugoshic";
+  font-family: "Boku2-Regular";
   /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
   src: url("https://hamatakuyaei.github.io/font/Boku2-Regular.woff") format("woff");
 }
 
 @font-face {
   /*フォントの名前*/
-  font-family: "CorporateLogo";
+  font-family: "Corporate-Logo-Medium-ver3";
   /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
   src: url("https://hamatakuyaei.github.io/font/Corporate-Logo-Medium-ver3.woff") format("woff");
 }
 
 @font-face {
   /*フォントの名前*/
-  font-family: "CorporateMincho";
+  font-family: "Corporate-Mincho-ver3";
   /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
   src: url("https://hamatakuyaei.github.io/font/Corporate-Mincho-ver3.woff") format("woff");
 }
 
 @font-face {
   /*フォントの名前*/
-  font-family: "appminntyo";
+  font-family: "アプリ明朝UD";
   /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
   src: url("https://hamatakuyaei.github.io/font/アプリ明朝UD.woff") format("woff");
 }
