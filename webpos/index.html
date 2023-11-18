@@ -1,11 +1,13 @@
 <!--
   -------------------オープンソースライセンス一覧-------------------
-  -------------------CSSフレームワーク〈Bulma〉MITライセンス-------------------
-  Code copyright 2016 Jeremy Thomas
-  Code released under the MIT license
-  https://opensource.org/licenses/mit-license.php
+  CSSフレームワーク bulma  MITlicence
+  バーコード読み取りライブラリ quagga MITlicence
+  手入力キーボードライブラリ SimpleKeyboard MITlicence
+-->
 
-  -------------------バーコード読み取りライブラリ〈quagga〉MITライセンス-------------------
+<!--
+  WebPOS
+  ウェブブラウザPOSシステム
 -->
 <!DOCTYPE html>
 <html lang="ja">
@@ -16,7 +18,7 @@
   <meta http-equiv="Cache-Control" content="no-store">
   <meta http-equiv="Cache-Control" content="no-cache">
 
-  <title>BURAUZA POS</title>
+  <title>WebPOS ウェブブラウザPOSシステム - Hamataku.</title>
   <link rel="icon" type="image/png" href="./favicon.png?3" sizes="16x16 24x24 32x32 48x48 64x64" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -48,13 +50,49 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
 
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" type="text/css" media="print" href="./print.css">
+
 
 </head>
 
 <body>
+  <!--読み込み中表示（ロゴ表示）開始-->
+  <script>
+    window.onload = () => {
+      const loader = document.getElementById('loader');
+      loader.classList.add('none');
+      loader.setAttribute("class", "none");
+      loader.setAttribute("id", "none");
+    };
+  </script>
+  <style>
+    .none {
+      display: none;
+    }
+
+    #none {
+      display: none;
+
+    }
+
+    #loader {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <div id="loader" class="" style="">
+    <div style="">
+      <img src="./img/poslogo.svg" width="300" style=""><br><br>
+      <center><img src="./img/hamalogo.svg" width="200" style="text-align: center;"></center>
+    </div>
+  </div>
+  <!--読み込み中表示（ロゴ表示）終了-->
   <section class="section">
-    <div class="columns">
-      <div class="column">
+    <div class="columns box p-0">
+      <div class="column nop">
         <article class="message is-link">
           <div class="message-header">
             <p id="yomitorityu">読み取り中。カメラにバーコードをかざしてください。</p>
@@ -63,6 +101,20 @@
             <div id="interactive" class="viewport"></div>
           </div>
         </article>
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">合計点数</p>
+              <p class="title" id="goukeitensuu">0</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">合計金額</p>
+              <p class="title" id="goukeikingaku">123</p>
+            </div>
+          </div>
+        </nav>
       </div>
       <div class="column is-7">
         <article class="message">
@@ -80,7 +132,7 @@
                     <th>本体価格</th>
                     <th>税込み価格</th>
                     <th>JANCODE</th>
-                    <th>削除</th>
+                    <th class="nop">削除</th>
                   </tr>
                 </thead>
                 <tbody id="kekka">
@@ -89,18 +141,18 @@
               </table>
             </div>
             <div id="naka"></div>
-            <button onclick="mplay('samecode')" class="button">おとてすと</button>
-            <button onclick="janimput()" class="button">jan認証</button>
-            <button onclick="kuriyomitori('0000000000000','camera')" class="button">テスト商品</button>
-            <button onclick="yomitori('4957812561075')" class="button">テスト商品</button>
-            <button onclick="yomitori('4957812561075')" class="button">値引き</button>
+            <button onclick="janimput()" class="button nop">jan認証</button>
+            <button onclick="kuriyomitori('0000000000000','camera')" class="button nop">カメラ商品</button>
+            <button onclick="yomitori('4957812561075')" class="button nop">テスト商品</button>
+            <button onclick="QS()" class="button nop">カメラ再起動</button>
+            <button onclick="modalOpen('janreserch')" class="button nop">バーコードが無い商品</button>
+            <button onclick="yomitori('9364267897923')" class="button nop">値引き</button>
+            <a href="#" class="button nop" id="dllnk" onclick="dllnk()">会計データダウンロード</a>
             <br>
             <div class="column">
-              <button class="button is-size-4	is-danger is-outlined"
+              <button class="button is-size-4	is-danger is-outlined nop"
                 onclick="modalOpen('torihikityuusikakunin'),mplay('tyuusikakunin')">取引中止</button>
-              <button onclick=" kokei()" class="button is-size-4	 is-link">小計</button>
-              <a onclick="uriagesakuzyo('0')" class="button">テスト</a>
-              <a onclick="uriagesakuzyo('1')"><span class="material-symbols-outlined">delete</span></a>
+              <button onclick=" kokei()" class="button is-size-4 nop is-link">小計</button>
             </div>
           </div>
         </article>
@@ -108,20 +160,7 @@
         <div id="akasatanahana"></div>
       </div>
     </div>
-    <nav class="level">
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">合計点数</p>
-          <p class="title" id="goukeitensuu">0</p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">合計金額</p>
-          <p class="title" id="goukeikingaku">123</p>
-        </div>
-      </div>
-    </nav>
+    <p class="nop">Hamataku. WebPOS V.3.0.4</p>
   </section>
   <!--モーダルウインドウ開始-->
   <!--jan未発見開始-->
@@ -140,7 +179,9 @@
   <div id="syoukeikekka" class="modalNoDisp">
     <dialog class="dialog" id="syousaikekka_dl">
       <div class="modalWindowsyoukei">
-        <p class="has-text-link is-size-3">決済入力</p>
+        <p class="has-text-link is-size-3">
+          <center>決済入力</center>
+        </p>
         <hr />
         <section class="section">
           <div class="syoukeizenntaityuuou">
@@ -252,7 +293,7 @@
             <button class="button is-medium" onclick="modalClose('kessaikakunin')">戻る</button>
             <button class="button is-medium is-danger is-outlined"
               onclick="modalOpen('torihikityuusikakunin'),mplay('tyuusikakunin')">取引中止</button>
-            <button class="button is-medium is-link">決済完了</button>
+            <button class="button is-medium is-link" onclick="kessaikannryou()">決済終了</button>
           </div>
 
         </center>
@@ -264,6 +305,42 @@
     </div>
   </div>
   <!--決済決定確認画面終了-->
+  <!--ジャンコード検索ウインドウ開始-->
+  <div id="janreserch" class="modalNoDisp">
+    <div class="modalWindow_kensaku">
+      <p class="">ジャンコード検索</p>
+      <hr />
+      <p>以下の中から商品を選んでください。</p>
+      <div class="kensaku box">
+        <div class="columns">
+          <div class="column">
+            <img src="./img/shohin/0072839489490.jpeg" width="150" class="syouhinnkennsakuyousyouhin"
+              onclick="nobcode('0072839489490')">
+          </div>
+          <div class="column">
+            <img src="./img/shohin/0072839489490.jpeg" width="150" class="syouhinnkennsakuyousyouhin"
+              onclick="nobcode('0072839489490')">
+          </div>
+          <div class="column">
+            <img src="./img/shohin/0072839489490.jpeg" width="150" class="syouhinnkennsakuyousyouhin"
+              onclick="nobcode('0072839489490')">
+          </div>
+          <div class="column">
+            <img src="./img/shohin/0072839489490.jpeg" width="150" class="syouhinnkennsakuyousyouhin"
+              onclick="nobcode('0072839489490')">
+          </div>
+          <div class="column">
+            <img src="./img/shohin/0072839489490.jpeg" width="150" class="syouhinnkennsakuyousyouhin"
+              onclick="nobcode('0072839489490')">
+          </div>
+        </div>
+      </div>
+      <a onclick="modalClose('janreserch')" class="close">
+        <span class="material-symbols-outlined">disabled_by_default</span>
+      </a>
+    </div>
+  </div>
+  <!--ジャンコード検索ウインドウ終了-->
   <!--取引中止確認開始-->
   <div id="torihikityuusikakunin" class="modalNoDisp">
     <div class="modalWindow_torihikikakunin">
@@ -281,6 +358,7 @@
     </div>
   </div>
   <!--取引中止確認終了-->
+
   <!--モーダルウインドウ終了-->
   <!--
 <div class="yoteif">
