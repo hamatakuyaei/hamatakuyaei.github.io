@@ -29,8 +29,20 @@
 
 @font-face {
   /*フォントの名前*/
+  font-family: "komorebi-gothic-P";
+  /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
+  src: url("https://hamatakuyaei.github.io/font/komorebi-gothic-P.woff") format("woff");
+}
+@font-face {
+  /*フォントの名前*/
   font-family: "アプリ明朝UD";
   /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
   src: url("https://hamatakuyaei.github.io/font/アプリ明朝UD.woff") format("woff");
+}
+@font-face {
+  /*フォントの名前*/
+  font-family: "アプリ明朝UD";
+  /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
+  src: url("https://hamatakuyaei.github.io/font/ocr-bfont.woff") format("woff");
 }
 
