@@ -90,14 +90,39 @@ var saisyuusougoukingaku = 0;
 var saisyuuoturikingaku = 0;
 var kanriid = 0;
 var kirisutesougaku = 0;
+var okyakusamaid = 0;
+var posid = 1;
+var janal_sougouuriage = 0;
+var posdata = [];
+
+
+posdata.push(
+    [
+        {
+            "posID": posid,
+            "startdate": new Date().getTime,
+            "webposVar": "3.0.4"
+        }
+    ]);
+alert(posdata);
 
 //Async Function として定義
 async function syouhinsyutoku() {
-    const response = await fetch('https://raw.githubusercontent.com/hamatakuyaei/hamatakuyaei.github.io/main/webpos/syohin/syouhin.json'); //await で fetch() が完了するまで待つ
+    const response = await fetch('https://raw.githubusercontent.com/hamatakuyaei/hamatakuyaei.github.io/main/webpos/syohin/syouhin.json?6'); //await で fetch() が完了するまで待つ
     return await response.json(); //await で response.json() が完了するまで待つ
 }
 
 function syouhintouroku(jan) {
+    if (okyakusamaid == 0) {
+        okyakusamaid = 'OID' + new Date().getTime();
+
+        posdata.push(
+            okyakusamaid[
+            {
+                "kounyuusyaID": okyakusamaid
+            }
+            ]);
+    }
     kanriid = new Date().getTime();
     document.getElementById('naka').innerHTML = jan;
     chickcount = 0;
@@ -108,8 +133,20 @@ function syouhintouroku(jan) {
     sougaku = (Number(sougaku) + zeikomi);
     kirisutesougaku = Math.floor(sougaku)
     document.getElementById('kekka').innerHTML =
-        `<tr id="${kanriid}"><th>${kattakazu}</th><th>${aiueo.name}</th><th>${aiueo.place}</th><th id="K${kanriid}">${zeikomi}</th><th>${aiueo.jancode}</th><th><a onclick="uriagesakuzyo(${kanriid})"><span class="material-symbols-outlined">delete</span></a></th></tr>
+        `<tr id="${kanriid}"><th class="nop">${kattakazu}</th><th>${aiueo.name}</th><th>${aiueo.place}</th><th id="K${kanriid}">${zeikomi}</th><th class="nop">${aiueo.jancode}</th><th><a class="nop" onclick="uriagesakuzyo(${kanriid})"><span class="material-symbols-outlined">delete</span></a></th></tr>
     ${document.getElementById('kekka').innerHTML}`;
+
+    posdata.push([
+        {
+            "okyakusamaID": okyakusamaid,
+            "kounyuuID": kanriid,
+            "jancode": aiueo.jancode,
+            "shohinname": aiueo.name,
+            "place": aiueo.place,
+            "tax": aiueo.tax
+        }
+    ]);
+
     document.getElementById('goukeitensuu').innerHTML = kattakazu;
     document.getElementById('kaikei-sougou-tensuu').innerHTML = kattakazu;
     document.getElementById('goukeikingaku').innerHTML = numjp(kirisutesougaku);
@@ -136,6 +173,7 @@ yomitori('0000000000000');
 
 
 async function yomitori(jan, gosa) {
+
     if (gosa == 'camera') {
         // ここでコードを受け取って、何かしらの処理(例えば、楽天市場APIを使用して商品検索等)
         document.getElementById('naka').innerHTML = jan;
@@ -283,7 +321,6 @@ function kokei() {
 }
 
 
-modalOpen('syoukeikekka'); //小計登録デザインデバック用
 
 function kaikeimodoru() {
     modalClose('syoukeikekka');
@@ -302,6 +339,10 @@ function kaikeikettei() {
 function torihikiyuusi() {
     mplay('tyuusisimasu');
     restart();
+    posdata.push([{
+        "okyakusamaID": okyakusamaid,
+        "tipe": "torihikityuusi",
+    }]);
 }
 
 function restart() {
@@ -320,13 +361,21 @@ function restart() {
     modalClose('syoukeikekka');
     modalClose('notfound');
     modalClose('torihikityuusikakunin');
+    okyakusamaid = 0;
 }
 
 
 function uriagesakuzyo(event) {
     try {
         if (window.confirm(`商品登録ID${event}のスキャン(売上登録)を取り消します。よろしいですか。`)) {
+
             alert(Number(document.getElementById(`K${event}`).innerHTML));
+            posdata.push([{
+                "okyakusamaID": okyakusamaid,
+                "tourokuID": event,
+                "tipe": "uriagetourokucancel",
+            }]);
+
             sougaku = sougaku - Number(document.getElementById(`K${event}`).innerHTML);
             kirisutesougaku = Math.floor(sougaku);
             kattakazu = kattakazu - 1
@@ -338,6 +387,7 @@ function uriagesakuzyo(event) {
             document.getElementById('kaikei-sougou-goukei').innerHTML = numjp(kirisutesougaku);
             document.getElementById('kaikei-kessai-goukei').innerHTML = numjp(kirisutesougaku);
             syoukeisougoukingaku = Math.floor(sougaku);
+
         }
 
     } catch (e) {
@@ -347,4 +397,45 @@ function uriagesakuzyo(event) {
 
 function numjp(x) {
     return x.toLocaleString('ja-JP');
+}
+
+function nobcode(code) {
+    yomitori(code);
+    modalClose('janreserch');
+}
+
+function kessaikannryou() {
+    janal_sougouuriage = janal_sougouuriage + saisyuusougoukingaku;
+    posdata.push(
+        okyakusamaid[
+        {
+            "kaikeiID": okyakusamaid,
+            "POSid": posid,
+            "oshiharaikingaku": saisyuuoazukarikingaku,
+            "ryoukinkokei": saisyuusougoukingaku,
+            "oturi": saisyuuoturikingaku
+        }
+        ]
+    )
+    restart();
+}
+
+document.getElementById('dllnk').addEventListener('click', (event) => {
+
+
+    // JSON ファイルを表す Blob オブジェクトを生成
+    const json = JSON.stringify(posdata, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+
+    // a 要素の href 属性に Object URL を セット
+    event.currentTarget.href = window.URL.createObjectURL(blob);
+});
+
+function dllnk() {
+    // JSON ファイルを表す Blob オブジェクトを生成
+    const json = JSON.stringify(posdata, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+
+    // a 要素の href 属性に Object URL を セット
+    document.getElementById('dllnk').href = window.URL.createObjectURL(blob);
 }
