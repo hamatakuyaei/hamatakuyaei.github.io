@@ -133,7 +133,7 @@ function syouhintouroku(jan) {
     sougaku = (Number(sougaku) + zeikomi);
     kirisutesougaku = Math.floor(sougaku)
     document.getElementById('kekka').innerHTML =
-        `<tr id="${kanriid}"><th class="nop">${kattakazu}</th><th>${aiueo.name}</th><th>${aiueo.place}</th><th id="K${kanriid}">${zeikomi}</th><th class="nop">${aiueo.jancode}</th><th><a class="nop" onclick="uriagesakuzyo(${kanriid})"><span class="material-symbols-outlined">delete</span></a></th></tr>
+        `<tr id="${kanriid}"><th class="nop">${kattakazu}</th><th>${aiueo.name}</th><th>${aiueo.place}</th><th id="K${kanriid}">${zeikomi}</th><th class="nop jancodea">${aiueo.jancode}</th><th><a class="nop" onclick="uriagesakuzyo(${kanriid})"><span class="material-symbols-outlined">delete</span></a></th></tr>
     ${document.getElementById('kekka').innerHTML}`;
 
     posdata.push([
@@ -362,6 +362,7 @@ function restart() {
     modalClose('notfound');
     modalClose('torihikityuusikakunin');
     okyakusamaid = 0;
+    QS();
 }
 
 
