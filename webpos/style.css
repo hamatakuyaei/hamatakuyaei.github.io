@@ -13,7 +13,12 @@ input {
   font-family: 'BIZ UDGothic', 'BIZ UDPGothic', sans-serif;
 }
 
-
+@font-face {
+  /*フォントの名前*/
+  font-family: "ocr-bfont";
+  /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
+  src: url("https://hamatakuyaei.github.io/font/ocr-bfont.woff") format("woff");
+}
 
 .title1 {
   font-family: 'BIZ UDGothic', sans-serif;
@@ -310,4 +315,9 @@ body {
 
 .viewport {
   transform: scale(-1, 1);
+}
+
+.jancodea {
+  font-family: ocr-bfont;
+  font-weight: 500;
 }
