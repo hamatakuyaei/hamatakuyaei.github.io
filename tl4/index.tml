@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>コントロールパネル</title>
+  <meta http-equiv="cache-control" content="no-cache, no-store"><!--キャッシュ削除命令metaタグ-->
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Pragma" content="no-cache">
+
+  <meta http-equiv="Expires" content="0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    @font-face {
+      /*フォントの名前*/
+      font-family: "ocr";
+      /*フォントファイルへのパス（複数指定の場合、上から順に読み込まれる）*/
+      src: url("https://hamatakuyaei.github.io/font/ocr-bfont.woff") format("woff");
+    }
+  </style>
+  <script type="text/javascript">
+
+    function modalOpen(area) {
+      //------------------------------------------------------------
+      //  モーダルウインドウ オープン
+      //------------------------------------------------------------
+      document.getElementById(area).className = "modalBg modalBgOpen";
+    }
+
+    function modalClose(area) {
+      //------------------------------------------------------------
+      //  モーダルウインドウ クローズ
+      //------------------------------------------------------------
+      document.getElementById(area).className = "modalBg modalBgClose";
+    }
+
+    function phoo() {
+      //------------------------------------------------------------
+      //  モーダルウインドウ オープン
+      //------------------------------------------------------------
+      document.getElementById("pho").className = "modalBg modalBgOpen";
+    }
+
+    function phoc() {
+      //------------------------------------------------------------
+      //  モーダルウインドウ クローズ
+      //------------------------------------------------------------
+      document.getElementById("pho").className = "modalBg modalBgClose";
+    }
+  </script>
+  <script>
+    (() => {
+      // ゼロ埋めして2桁の数値にする
+      const zero = n => (n < 10) ? "0" + n.toString() : n.toString();
+
+      // 日付の文字列化
+      const youbi = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const getDateString = date =>
+        `${date.getFullYear()}/ ${zero(date.getMonth() + 1)}/  ${zero(date.getDate())}/ ${youbi[date.getDay()]}`;
+
+      // 時間の文字列化
+      const getHourString = date =>
+        `${zero(date.getHours())}:${zero(date.getMinutes())}:${zero(date.getSeconds())}`;
+
+      // DOMの構築を待つ
+      window.addEventListener('DOMContentLoaded', () => {
+        // 日時を表示するDOM要素を取得
+        const dateDiv = document.getElementById("date");
+        const clockDiv = document.getElementById("clock");
+
+        // 現在の日
+        let nowDate = null;
+
+        // 1秒周期のタイマーセット
+        setInterval(() => {
+          // 現在の日時を取得
+          const now = new Date();
+          // 日付が変わったら日付を再表示
+          if (nowDate !== now.getDate()) {
+            nowDate = now.getDate();
+            dateDiv.innerText = getDateString(now);
+          }
+
+          // 時間を再表示
+          clockDiv.innerText = getHourString(now);
+        }, 1000);
+      });
+    })();
+
+  </script>
+  <!-- partial:index.partial.html -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@500&family=M+PLUS+2:wght@300;400&family=Noto+Sans+JP&family=Zen+Kaku+Gothic+New:wght@500&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="body">
+  <div class="zikan" style="font-family: 'ocr'">
+    <div id="date" class="ocr"></div>
+  </div>
+
+  <div class="columns">
+    <a class="button is-small column  is-2 has-text-centered" onclick="modalOpen('cmdpl')">cmd</a>
+    <div id="clock" class="ocr column is-2 has-text-centered" style="width: 8rem;"></div>
+    <marquee class="column" scrollamount="20" id="sutetasu">webSocket確認！　スリープ状態回復の場合は、リロードしてください。</marquee>
+    <marquee class="column" scrollamount="20" id="kinnkyu">EEW・EQI確認なし。(p2p地震情報)</marquee>
+  </div>
+  <div class="has-text-centered">
+
+    <div class="columns is-gapless">
+
+      <div class="yonichi column">
+        <p class="title">TL4</p>
+        <div id="ima4" class="box transparent"><img
+            src="https://raw.githubusercontent.com/hamatakuyaei/hamatakuyaei.github.io/main/kuro7hapyo/img/1.png">
+        </div>
+        <a class="button is-small is-danger" onclick="sendauto('tl4','0')">tp-off</a>
+        <div id="itiran4" class="sentaku"></div>
+      </div>
+
+      <div class="yonichi column">
+        <p class="title">TL3</p>
+        <div id="ima3" class="box transparent"><img
+            src="https://raw.githubusercontent.com/hamatakuyaei/hamatakuyaei.github.io/main/kuro7hapyo/img/1.png">
+        </div>
+        <a class="button is-small is-danger" onclick="sendauto('tl3','0')">tp-off</a>
+        <div id="itiran3" class="sentaku"></div>
+      </div>
+
+      <div class="yonichi column">
+        <p class="title">TL2</p>
+        <div id="ima2" class="box transparent"><img
+            src="https://raw.githubusercontent.com/hamatakuyaei/hamatakuyaei.github.io/main/kuro7hapyo/img/1.png">
+        </div>
+        <a class="button is-small is-danger" onclick="sendauto('tl2','0')">tp-off</a>
+        <div id="itiran2" class="sentaku"></div>
+      </div>
+
+      <div class="yonichi column">
+        <p class="title">TL1</p>
+        <div id="ima1" class="box transparent"><img
+            src="https://raw.githubusercontent.com/hamatakuyaei/hamatakuyaei.github.io/main/kuro7hapyo/img/1.png">
+        </div>
+        <a class="button is-small is-danger" onclick="sendauto('tl1','0')">tp-off</a>
+        <div id="itiran1" class="sentaku"></div>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+  <div class="modalBg modalBgClose" id="sousinok">
+    <div class="modalWindow">
+      <section class="section">送信しました。
+        <a onclick="modalClose('sousinok')" class="button">OK</a>
+      </section>
+    </div>
+  </div>
+
+  <div class="modalBg modalBgClose" id="cmdpl">
+    <div class="modalWindow"> <!-- ここがウインドウとなります -->
+      <section class="section">
+        <p class="title">command prompt</p>
+        <div id="id" style=""></div>
+        <input id="msg" class="input is-primary" class="nice-textbox" value="" style="width: 80vw;">
+        <button class="button" id="send" type="button" onclick="sendChat()"><span class="material-symbols-outlined">send
+          </span></button>
+        <div id="chat" style="width:100%;height:300px;border:solid 1px #FFFFFF;overflow:auto;"></div>
+        <script>
+        </script>
+
+        <a class="button" onclick="modalClose('cmdpl')">閉じる</a>
+      </section>
+    </div>
+  </div>
+  <!-- partial -->
+  <script src="./script.js"></script>
+
+</body>
+
+</html>
