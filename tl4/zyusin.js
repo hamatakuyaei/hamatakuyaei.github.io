@@ -1,4 +1,4 @@
-alert('構文確認');
+
 function modalOpen(area) {
 	//------------------------------------------------------------
 	//  モーダルウインドウ オープン
@@ -32,7 +32,7 @@ let id = params.get('id');
 ws = new WebSocket("wss://cloud.achex.ca/chat");
 // WS接続
 ws.onopen = e => {
-	alert('aa');
+
 	console.log('open');
 	chat.innerHTML = 'You ID : ' + id + '（' + getDateTime() + '）';
 	// 認証（auth, passwordは何でもOK）
@@ -86,7 +86,7 @@ function addChat(id, msg) {
 		sendChat('sendtest OK!! online! このメッセージは、切断防止用兼用です。');
 
 	} else if (msg == 'Login') {
-		alert('login');
+
 		document.getElementById('tl1').innerHTML = 'コントロールパネルに接続しました。表示されるまで少しお待ち下さい。';
 		document.getElementById('tl2').innerHTML = 'コントロールパネルに接続しました。表示されるまで少しお待ち下さい。';
 		document.getElementById('tl3').innerHTML = 'コントロールパネルに接続しました。表示されるまで少しお待ち下さい。';
