@@ -4,7 +4,7 @@ var nex = '0';
 var mes = 0;
 
 var myID = 'con';
-var room = '雲雀祭体育部門';
+var room = 'asdfghjklqwertyuiop12345';
 var pw = 'kuroki';
 
 var chat = document.getElementById("chat");
