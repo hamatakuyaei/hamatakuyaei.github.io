@@ -108,7 +108,7 @@ alert(posdata);
 
 //Async Function として定義
 async function syouhinsyutoku() {
-    const response = await fetch('https://raw.githubusercontent.com/hamatakuyaei/hamatakuyaei.github.io/main/webpos/syohin/syouhin.json?6'); //await で fetch() が完了するまで待つ
+    const response = await fetch('https://raw.githubusercontent.com/hamatakuyaei/hamatakuyaei.github.io/main/webpos/syohin/syouhin.json'); //await で fetch() が完了するまで待つ
     return await response.json(); //await で response.json() が完了するまで待つ
 }
 
