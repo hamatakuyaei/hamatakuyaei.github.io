@@ -1,0 +1,234 @@
+/*スクロールバー非表示
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+::-webkit-scrollbar{
+  display:none;
+}
+*/
+
+body {
+    font-family: "BIZ UDGothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+/*スクロールバースタイル変更chromeのみ*/
+::-webkit-scrollbar {
+    background: #ffffff;
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #5c5c5c;
+}
+
+/*
+html {
+    overflow: hidden;
+}
+*/
+
+.product {
+    width: 260px;
+    height: 140px;
+    position: relative;
+
+    text-decoration: none;
+}
+
+.product {
+    text-decoration: none;
+    user-select: none;
+}
+
+.product img {
+    max-height: 100px;
+    max-width: 100px;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.mycolumncon p {
+    padding-left: 130px;
+    text-decoration: none;
+}
+
+.ptlist {
+    width: 250px;
+    /* height: 60px; */
+}
+
+.ptlist p {
+    padding: 0px;
+}
+
+.ptlist .box {
+    width: 250px;
+    height: 50px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.listcenter {
+    margin: 0 auto;
+
+}
+
+.pdsize {
+    height: 70vh
+}
+
+.scbar {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.pdlistsizeA {
+    height: calc(75vh - 90px) !important;
+}
+
+.dlt {
+    position: relative;
+    right: 0;
+}
+
+
+/* === モーダル非表示（初期） ============================== */
+.modalNoDisp {
+    display: none;
+}
+
+/* === モーダルバックグランド ============================== */
+.modalBg {
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(circle at 50% 50%,
+            rgba(0, 0, 0, 0.90),
+            rgba(0, 0, 0, 0.70));
+    z-index: 10;
+}
+
+/* === モーダルバックグランド：OPEN時のアニメーション ====== */
+.modalBgOpen {
+    animation: bgOpenAnime 0.2s ease;
+}
+
+@keyframes bgOpenAnime {
+
+    /* フェードイン */
+    0% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 1
+    }
+}
+
+/* === モーダルバックグランド：CLOSE時のアニメーション ===== */
+.modalBgClose {
+    bottom: 100%;
+    animation: bgCloseAnime 0.2s ease;
+}
+
+@keyframes bgCloseAnime {
+
+    /* フェードイン */
+    0% {
+        opacity: 1;
+        bottom: 0
+    }
+
+    100% {
+        opacity: 0;
+        bottom: 0
+    }
+}
+
+/* === モーダルウインド ==================================== */
+.modalBg .modalWindow {
+    z-index: 1000000;
+    /* モーダルウインドを中心に表示 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    /* ↓モーダルウインドウの見た目：変更してください */
+    /*width: 300px;*/
+    min-height: 220px;
+    background: #fff;
+    border: 3px solid #35557f;
+    border-radius: 10px;
+    font-size: 16pt;
+    text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    .modalBg .modalWindow {
+        z-index: 1000000;
+        /* モーダルウインドを中心に表示 */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 11;
+        /* ↓モーダルウインドウの見た目：変更してください */
+        /*width: 300px;*/
+        min-height: 220px;
+        color: #ffffff;
+        background: #1e1e1e;
+        border: 3px solid #35557f;
+        border-radius: 10px;
+        font-size: 16pt;
+        text-align: center;
+    }
+}
+
+
+.modalccon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.modalhr {
+    margin-top: 5px;
+}
+
+.pdngt5 {
+    padding-top: 5px;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.tabs a span {
+    text-decoration: none;
+
+}
+
+.viewport canvas {
+    display: none;
+}
+
+strong {
+    font-family: "BIZ UDGothic", sans-serif;
+    font-weight: 700;
+}

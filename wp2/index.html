@@ -1,0 +1,472 @@
+<!--Webpos2 V0.0.0(β) Hamataku.-->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <title>WebPOS2</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script src="./quagga/unpkgquagga.min.js"></script>
+  <script src="./quagga/githubquagga.min.js"></script>
+  <script src="./quagga/howler.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&family=Noto+Sans+JP:wght@100..900&display=swap"
+    rel="stylesheet">
+
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+
+  <!--読み込み中表示（ロゴ表示）開始-->
+  <script>
+    window.onload = () => {
+      const loader = document.getElementById('loader');
+      loader.classList.add('none');
+      loader.setAttribute("class", "none");
+      loader.setAttribute("id", "none");
+    };
+  </script>
+  <style>
+    .none {
+      display: none;
+    }
+
+    #none {
+      display: none;
+
+    }
+
+    #loader {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <div id="loader" class="" style="">
+    <div style="">
+      <svg version="1.1" viewBox="0.0 0.0 731.6115485564304 145.50393700787401" fill="none" stroke="none"
+        stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns="http://www.w3.org/2000/svg">
+        <clipPath id="p.0">
+          <path d="m0 0l731.6116 0l0 145.50394l-731.6116 0l0 -145.50394z" clip-rule="nonzero" />
+        </clipPath>
+        <g clip-path="url(#p.0)">
+          <path fill="#757575" fill-opacity="0.0" d="m0 0l731.6116 0l0 145.50394l-731.6116 0z" fill-rule="evenodd" />
+          <path fill="#757575"
+            d="m0.06626886 13.65574l30.938253 120.968575l5.175127 0l31.275757 -107.49637l31.444519 107.49637l5.203247 0l31.107018 -120.968575l-6.4126587 0l-27.478798 109.91518l-31.78202 -109.91518l-3.9938507 0l-31.782024 109.91518l-27.647547 -109.91518z"
+            fill-rule="evenodd" />
+          <path fill="#757575"
+            d="m180.64706 56.181774c5.306366 0 10.003357 1.321907 14.090958 3.9657211c4.087616 2.643814 7.397064 6.0751457 9.928375 10.294003c2.531311 4.200096 4.031357 8.775215 4.500107 13.725334l-59.28894 0c1.6125488 -8.531456 5.1845093 -15.328499 10.715881 -20.391125c5.5313873 -5.062622 12.215912 -7.593933 20.05362 -7.593933zm0 -6.047024c-7.256424 0 -13.706589 1.8469238 -19.35048 5.54076c-5.643875 3.6750946 -10.078354 8.765842 -13.303452 15.272251c-3.2250671 6.506401 -4.837616 13.969086 -4.837616 22.388039c0 8.4002 1.6125488 15.853508 4.837616 22.359924c3.2250824 6.5064087 7.659561 11.606537 13.303452 15.300369c5.6438904 3.6938477 12.094055 5.540756 19.35048 5.540756c16.594147 0 28.28505 -8.297073 35.072723 -24.891228l-5.7095184 -2.418808c-5.643875 14.287849 -15.43161 21.43177 -29.363205 21.43177c-6.675171 0 -12.469055 -1.7812958 -17.381683 -5.3438797c-4.89386 -3.581337 -8.550201 -8.428337 -10.969009 -14.5409775c-2.418808 -6.1126556 -3.4500732 -12.965942 -3.0938263 -20.559875l66.01099 0l0 -3.1219482c0 -5.8688965 -1.3594208 -11.62529 -4.078232 -17.269173c-2.700058 -5.6438904 -6.6470337 -10.331505 -11.840912 -14.062843c-5.175125 -3.7500877 -11.3909 -5.6251373 -18.647324 -5.6251373z"
+            fill-rule="evenodd" />
+          <path fill="#757575"
+            d="m276.5484 56.181774c6.1126404 0 11.522156 1.5562859 16.228516 4.668865c4.7250977 3.0938225 8.437714 7.434555 11.137756 13.022194c2.7188416 5.587631 4.078247 12.0752945 4.078247 19.462967c0 7.3689346 -1.3594055 13.875343 -4.078247 19.519226c-2.7000427 5.6438828 -6.4126587 10.02211 -11.137756 13.134697c-4.70636 3.1125717 -10.115875 4.6688614 -16.228516 4.6688614c-6.2251587 0 -11.700287 -1.5562897 -16.425415 -4.6688614c-4.725113 -3.1125717 -8.437698 -7.490799 -11.137756 -13.134697c-2.7000732 -5.6438828 -4.05011 -12.150291 -4.05011 -19.519226c0 -7.3876724 1.3500366 -13.875336 4.05011 -19.462967c2.700058 -5.587639 6.4126434 -9.928371 11.137756 -13.022194c4.725128 -3.1125793 10.200256 -4.668865 16.425415 -4.668865zm-37.660294 -47.1949l0 125.637436l6.0470123 0l0 -17.97232c2.9813232 6.1126556 7.209549 10.959656 12.684692 14.540985c5.475128 3.5625763 11.784668 5.343872 18.928589 5.343872c7.2564087 0 13.678436 -1.8469086 19.266083 -5.540756c5.5876465 -3.69384 9.993988 -8.793976 13.219086 -15.300369c3.2250671 -6.5064163 4.837616 -13.959724 4.837616 -22.359924c0 -8.418953 -1.6125488 -15.881638 -4.837616 -22.388039c-3.2250977 -6.5064087 -7.631439 -11.597157 -13.219086 -15.272251c-5.5876465 -3.6938362 -12.009674 -5.54076 -19.266083 -5.54076c-7.143921 0 -13.453461 1.7906723 -18.928589 5.3720093c-5.4751434 3.5625877 -9.703369 8.390831 -12.684692 14.484726l0 -61.00461z"
+            fill-rule="evenodd" />
+          <path fill="#757575"
+            d="m390.08588 19.534008c9.562744 0 16.584778 1.9312954 21.066132 5.79389c4.500122 3.8625927 6.750183 9.881487 6.750183 18.056688c0 8.175201 -2.250061 14.222225 -6.750183 18.141068c-4.4813538 3.9188423 -11.503387 5.878269 -21.066132 5.878269l-45.45111 0l0 -47.869915zm-51.329376 -6.047023l0 121.13733l5.8782654 0l0 -61.17337l45.45111 0c11.512787 0 20.034851 -2.643814 25.566254 -7.9314423c5.531372 -5.306381 8.297058 -12.684681 8.297058 -22.134914c0 -9.337727 -2.765686 -16.650404 -8.297058 -21.938032c-5.5314026 -5.3063774 -14.053467 -7.959569 -25.566254 -7.959569z"
+            fill-rule="evenodd" />
+          <path fill="#757575"
+            d="m494.9746 17.452707c9.3377075 0 17.662903 2.2500553 24.975586 6.750164c7.312683 4.5001087 13.040955 10.959642 17.184814 19.378595c4.14386 8.4002075 6.2157593 18.525455 6.2157593 30.37574c0 11.869041 -2.0718994 22.04116 -6.2157593 30.516365c-4.14386 8.456451 -9.872131 14.934738 -17.184814 19.434853c-7.312683 4.5001144 -15.637878 6.75016 -24.975586 6.75016c-9.337738 0 -17.662933 -2.2500458 -24.975616 -6.75016c-7.312683 -4.5001144 -13.069061 -10.978401 -17.269165 -19.434853c-4.2001038 -8.475204 -6.300171 -18.647324 -6.300171 -30.516365c0 -11.850285 2.1000671 -21.975533 6.300171 -30.37574c4.2001038 -8.418953 9.956482 -14.878487 17.269165 -19.378595c7.312683 -4.5001087 15.637878 -6.750164 24.975616 -6.750164zm0 -6.047023c-10.837769 0 -20.344269 2.6250658 -28.51944 7.8751917c-8.175201 5.2313786 -14.540985 12.51593 -19.097351 21.853657c-4.5375977 9.337727 -6.806427 20.278618 -6.806427 32.822674c0 12.562798 2.2688293 23.541199 6.806427 32.935173c4.556366 9.393982 10.92215 16.687912 19.097351 21.88179c8.175201 5.175125 17.681671 7.76268 28.51944 7.76268c10.837769 0 20.344238 -2.587555 28.51941 -7.76268c8.175232 -5.193878 14.531616 -12.487808 19.069214 -21.88179c4.5563965 -9.393974 6.8345947 -20.372375 6.8345947 -32.935173c0 -12.544056 -2.2781982 -23.484947 -6.8345947 -32.822674c-4.5375977 -9.337727 -10.893982 -16.622278 -19.069214 -21.853657c-8.175171 -5.250126 -17.68164 -7.8751917 -28.51941 -7.8751917z"
+            fill-rule="evenodd" />
+          <path fill="#757575"
+            d="m609.72284 11.405684c-7.2564087 0 -13.65033 1.3594093 -19.181702 4.078224c-5.531372 2.7000666 -9.881531 6.4689074 -13.050354 11.306525c-3.1688232 4.837618 -4.753235 10.425257 -4.753235 16.762907c0 18.206692 11.522156 29.213207 34.566467 33.019558c10.594055 1.6125336 18.628601 3.768837 24.103699 6.4689026c5.4751587 2.7000656 9.187744 5.8970184 11.137817 9.590858c1.96875 3.6938477 2.953186 7.959572 2.953186 12.797188c0 5.756386 -1.7062988 10.509628 -5.1188965 14.25972c-3.3938599 3.7313385 -7.7158203 6.497032 -12.965942 8.297081c-5.2313843 1.7812958 -10.556519 2.671936 -15.975403 2.671936c-16.012878 0 -28.678833 -4.9594955 -37.997803 -14.878487l-4.331299 4.1626053c5.17511 5.5313797 11.334595 9.684601 18.478516 12.459671c7.143982 2.7563171 15.094177 4.1344757 23.850586 4.1344757c7.2564697 0 13.903503 -1.2375183 19.941162 -3.7125854c6.0563354 -2.493805 10.893982 -6.0657654 14.512817 -10.715889c3.6375732 -4.6688614 5.45636 -10.228363 5.45636 -16.678528c0 -10.14399 -3.3094482 -17.85981 -9.928345 -23.147438c-6.6188965 -5.306381 -17.644165 -9.225227 -33.075806 -11.756538c-10.143982 -1.6125336 -17.578552 -4.5751038 -22.30365 -8.887714c-4.7250977 -4.331356 -7.0877075 -10.359623 -7.0877075 -18.084816c0 -8.400204 2.9344482 -14.850361 8.803345 -19.35047c5.8876953 -4.5001087 13.209717 -6.750164 21.966187 -6.750164c6.093872 0 11.794067 0.9843979 17.100403 2.9531975c5.3063965 1.9500484 10.659668 4.9407463 16.059753 8.972092l3.6282349 -4.837618c-5.9813843 -4.4813595 -11.944031 -7.7908134 -17.88794 -9.928366c-5.925171 -2.1375523 -12.225281 -3.2063284 -18.900452 -3.2063284z"
+            fill-rule="evenodd" />
+          <path fill="#757575"
+            d="m699.9331 12.615089c-5.7751465 0 -10.912781 1.3875351 -15.412842 4.1626015c-4.4813843 2.7563171 -7.987732 6.5814095 -10.519043 11.475279c-2.531311 4.8938694 -3.796936 10.575258 -3.796936 17.044165l6.046997 0c0 -8.756462 2.296936 -15.384748 6.890808 -19.88486c4.61261 -4.5001087 10.209595 -6.750164 16.791016 -6.750164c8.062683 0 14.362854 2.1938038 18.900452 6.5814095c4.5563965 4.3688545 6.722046 10.931513 6.4970703 19.687979c-0.11254883 4.5001106 -1.4437866 8.887718 -3.9938965 13.162823c-2.531311 4.2563515 -5.7563477 8.512703 -9.675232 12.769058c-3.9188232 4.2563553 -8.062683 8.6345825 -12.431519 13.134697c-4.8376465 4.837616 -9.534607 9.797119 -14.091003 14.878487c-4.5375977 5.062622 -8.27832 10.275253 -11.222107 15.637878c-2.9438477 5.3438797 -4.4157715 11.072144 -4.4157715 17.184792l0 2.9250793l61.00464 0l0 -5.8782806l-54.78882 0c0.5812378 -4.8376083 2.250061 -9.525223 5.0063477 -14.062836c2.7750854 -4.5563583 6.1782837 -9.018967 10.209595 -13.387825c4.031372 -4.3876038 8.175232 -8.775215 12.43158 -13.162819c4.500122 -4.5938644 8.85022 -9.197098 13.050293 -13.809715c4.218872 -4.61261 7.706482 -9.337723 10.462769 -14.175343c2.7563477 -4.837616 4.2001343 -9.853363 4.33136 -15.047241c0.3375244 -10.237747 -2.3156738 -18.20669 -7.9595337 -23.906832c-5.643921 -5.718889 -13.415955 -8.578333 -23.316223 -8.578333z"
+            fill-rule="evenodd" />
+        </g>
+      </svg> <!--<center><img src="./img/hamalogo.svg" width="200" style="text-align: center;"></center>-->
+    </div>
+  </div>
+  <!--読み込み中表示（ロゴ表示）終了-->
+
+
+  <script type="module">
+    import devtools from './node_modules/devtools-detect/index.js';
+
+    // Check if it's open
+    console.log('Is DevTools open:', devtools.isOpen);
+
+    // Check it's orientation, `undefined` if not open
+    console.log('DevTools orientation:', devtools.orientation);
+
+    // Get notified when it's opened/closed or orientation changes
+    window.addEventListener('devtoolschange', event => {
+      console.log('Is DevTools open:', event.detail.isOpen);
+      console.log('DevTools orientation:', event.detail.orientation);
+    });
+  </script>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation" id="header">
+    <div class="navbar-brand">
+
+      <p class="navbar-item">
+        <img src="./WebPOS2.svg" width="150">
+      </p>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <p class="navbar-item">
+          WebPOS2 V.0.0.0(β)
+        </p>
+
+        <p class="navbar-item">
+          吾輩は猫である。名前はまだない。
+        </p>
+        <p class="navbar-item">
+          レジID:00001
+        </p>
+
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <p class="navbar-item" id="ntime">
+            現在時刻を読込中
+          </p>
+          <div class="buttons">
+            <a class="button is-light">
+              <span class="material-symbols-outlined">
+                menu
+              </span>
+            </a>
+            <a class="button is-light" onclick="modalOpen('settings','700px','600px')">
+              <span class="material-symbols-outlined">
+                settings
+              </span> </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section pt-0	">
+    <div class="columns">
+      <div class="column">
+        <div class="message is-info">
+
+          <div class="message-header">
+            <p>商品選択
+            </p>
+          </div>
+
+          <div class="message-body pt-0">
+            <div class="tabs is-toggle mb-2 pt-2">
+              <ul>
+                <li class="is-active" id="spdlch">
+                  <a onclick="spdl()" style="text-decoration: none;">
+                    <span>商品選択</span>
+                  </a>
+                </li>
+                <li id="qug13ch">
+                  <a onclick="qug('13jan')" style="text-decoration: none;">
+                    <span>13桁JANコード</span>
+                  </a>
+                </li>
+                <li id="qug8ch">
+                  <a onclick="qug('8jan')" style="text-decoration: none;">
+                    <span>8桁JANコード</span>
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <span>商品手ID入力</span>
+                  </a>
+                </li>
+              </ul>
+              <a class="button" onclick="pdlistred('yes')">商品リスト再読み込み</a>
+
+            </div>
+
+            <div id="spdl" class="">
+              <div class="scbar pdsize">
+                <div class="columns is-multiline" id="pdch">
+                  <p class="column has-text-centered	">読込中
+                    <progress class="progress is-small is-link" max="100">15%</progress>
+
+                  </p>
+
+                </div>
+              </div>
+            </div>
+
+            <div id="qugread" class="" style="display: none;">
+              <div id="interactive" class="viewport"></div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="column is-one-quarter">
+        <div class="message">
+          <div class="message-header listcenter has-text-white	">
+            一覧
+          </div>
+          <div class="message-body">
+            <div class="content ">
+              <div class="pdlistsizeA scbar" id="pdlist">
+                <!--
+                <div class="box">
+                  <div class="columns is-gapless">
+                    <div class="column ptlist listcenter">
+                      <p>緑茶<br />100円</p>
+                    </div>
+                    <div class="column">
+                      <p class="is-size-3	">100円</p>
+                    </div>
+                  </div>
+                </div>
+                -->
+
+
+              </div>
+
+              <div>
+                <p id="allp">合計:0円</p>
+                <a class="button is-medium" onclick="modalOpen('dcansel','500px','300px')">取引中止</a>
+                <button class="button is-medium" onclick="liqwinop()" id="liqwinopbtn">小計</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- モーダルウインドウのエリア -->
+  <div id="settings" class="modalNoDisp">
+    <div class="modalWindow" id="settingsmain" style=""> <!-- ここがウインドウとなります -->
+      <p class="pdngt5">設定</p>
+
+      <p class="modalccon">
+        <button onclick="modalClose('settings')"> <span class="material-symbols-outlined">
+            disabled_by_default
+          </span></button>
+      </p>
+
+      <hr class="modalhr" />
+      <div class="modalmaincon">
+        <section class="section">
+          <p class="title">デプロイURL設定</p>
+          <p><a>デプロイURLの取得の仕方</a>で取得したデプロイURLを入力してください。</p>
+          <input type="url" class="input" value="">
+          <hr />
+          <p class="title">ライセンスキー</p>
+          <p>WebPOS2のライセンスキーを入力してください。</p>
+          <input type="text" class="input" value="">
+        </section>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- モーダルウインドウのエリア -->
+  <div id="liqent" class="modalNoDisp">
+    <div class="modalWindow" id="liqentmain" style=""> <!-- ここがウインドウとなります -->
+      <p class="pdngt5">決済入力</p>
+
+      <p class="modalccon">
+        <button onclick="modalClose('liqent')"> <span class="material-symbols-outlined">
+            disabled_by_default
+          </span></button>
+      </p>
+
+      <hr class="modalhr" />
+      <div class="modalmaincon">
+        <section class="section">
+
+          <div class="tyuuou">
+            <table class="table center">
+              <tbody>
+                <tr class="has-background-success-dark">
+                  <th class=" has-text-white-bis">合計</th>
+                  <th class=" has-text-white-bis" id="liq_pay_all">0</th>
+                </tr>
+                <tr>
+                  <th>クーポン等値引き</th>
+                  <th>
+                    <input class="input" type="number" id="liq_pay_cp" onkeyup="liqdis()" placeholder="値引き額">
+                  </th>
+                </tr>
+                <tr has-background-warning-dark="">
+                  <th>お預かり</th>
+                  <th id="autofc">
+                    <input id="liq_pay_pt" class="input inputA" type="number" onkeyup="liqdis()"
+                      placeholder="お預かりした現金の価格" autofocus autocomplete="off">
+                  </th>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="has-background-info has-text-white">
+                  <th>お釣り</th>
+                  <th id="liq_pay_cng">-</th>
+                </tr>
+
+              </tfoot>
+            </table>
+
+          </div>
+
+          <center>
+            <br />
+            <br />
+            <button class="button is-medium is-large" onclick="modalClose('liqent')">戻る</button>
+            <button class="button is-link is-large" onclick="payok()" id="finbto" disabled>決済決定</button>
+          </center>
+        </section>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- モーダルウインドウのエリア -->
+  <div id="paycheck" class="modalNoDisp">
+    <div class="modalWindow" id="paycheckmain" style=""> <!-- ここがウインドウとなります -->
+      <p class="pdngt5">確認</p>
+
+      <p class="modalccon">
+        <button onclick="modalClose('paycheck')"> <span class="material-symbols-outlined">
+            disabled_by_default
+          </span></button>
+      </p>
+
+      <hr class="modalhr" />
+      <div class="modalmaincon">
+        <p class="is-size-5">以下の結果を確認し、<strong>お客様にお釣りと商品を渡し</strong>、確認終了ボタンを押してください。</p>
+        <hr />
+        <div class="has-text-centered">
+          <center>
+            <table class="table saisyutable">
+              <tbody>
+                <tr>
+                  <th>お預かり</th>
+                  <th id="kliq_paych_pt"></th>
+                </tr>
+                <tr>
+                  <th>合計請求金額</th>
+                  <th id="liq_paych_all">0</th>
+                </tr>
+                <tr class="has-background-info-dark">
+                  <th class="has-text-white-bis	">お釣り</th>
+                  <th class="has-text-white-bis	" id="liq_paych_cng">0</th>
+                </tr>
+              </tbody>
+            </table>
+            <div class="mb-4">
+              <button class="button is-medium" onclick="modalClose('paycheck')">戻る</button>
+              <button class="button is-medium is-danger is-outlined"
+                onclick="modalOpen('dcansel','500px','300px')">取引中止</button>
+              <button class="button is-medium is-link" onclick="paychackend()">確認終了</button>
+            </div>
+
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- モーダルウインドウのエリア -->
+  <div id="dcansel" class="modalNoDisp">
+    <div class="modalWindow" id="dcanselmain" style=""> <!-- ここがウインドウとなります -->
+      <p class="pdngt5">確認</p>
+
+      <p class="modalccon">
+        <button onclick="modalClose('dcansel')"> <span class="material-symbols-outlined">
+            disabled_by_default
+          </span></button>
+      </p>
+
+      <hr class="modalhr" />
+      <div class="modalmaincon">
+        <p class="is-size-3">取引を中止しますか？</p><br /><br />
+        <button class="button" value="" id="dcanyes" onclick="modalClose('dcansel')">いいえ。取引を続行します。</button>
+        <button class="button" value="" id="dcanno" onclick="chackend()">はい。取引を中止します。</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- モーダルウインドウのエリア -->
+  <div id="notfound" class="modalNoDisp">
+    <div class="modalWindow" id="notfoundmain" style=""> <!-- ここがウインドウとなります -->
+      <p class="pdngt5">エラー</p>
+
+      <p class="modalccon">
+        <button onclick="modalClose('notfound')"> <span class="material-symbols-outlined">
+            disabled_by_default
+          </span></button>
+      </p>
+
+      <hr class="modalhr" />
+      <div class="modalmaincon">
+        <section class="section">
+          <p class="">このコード（商品ID）の商品が見つかりませんでした。</p>
+          <p>検索した値：<span id="researchedid"></span></p>
+          <button class="button" value="" id="dcanyes" onclick="modalClose('notfound')">OK</button>
+        </section>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- モーダルウインドウのエリア -->
+  <div id="ynqu" class="modalNoDisp">
+    <div class="modalWindow" id="ynqumain" style=""> <!-- ここがウインドウとなります -->
+      <p class="pdngt5" id="ynqutitle">確認</p>
+
+      <p class="modalccon">
+        <button onclick="modalClose('ynqu')"> <span class="material-symbols-outlined">
+            disabled_by_default
+          </span></button>
+      </p>
+
+      <hr class="modalhr" />
+      <div class="modalmaincon" id="ynqucon">
+        ここに確認の内容が入ります。
+      </div>
+      <center>
+        <button class="button" value="" id="ynquyes">いいえ</button>
+        <button class="button" value="" id="ynquno">はい</button>
+      </center>
+    </div>
+  </div>
+</body>
+<script src="./tokei.js"></script>
+<script src="./script.js"></script>
+
+
+<script type="module">
+  import devtools from './uncdev.js';
+
+  // Check if it's open
+  console.log('Is DevTools open:', devtools.isOpen);
+
+  // Check it's orientation, `undefined` if not open
+  console.log('DevTools orientation:', devtools.orientation);
+
+  // Get notified when it's opened/closed or orientation changes
+  window.addEventListener('devtoolschange', event => {
+    console.log('Is DevTools open:', event.detail.isOpen);
+    console.log('DevTools orientation:', event.detail.orientation);
+  });
+</script>
+
+</html>
