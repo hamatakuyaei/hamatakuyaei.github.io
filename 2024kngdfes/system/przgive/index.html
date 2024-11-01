@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="section pt-3">
+        <div class="columns ">
+
+            <div class="column is-half">
+                <center>
+                    <div id="wrapper" class="">
+                        <video id="video" autoplay muted playsinline></video>
+                        <canvas id="camera-canvas" class="nodisply"></canvas>
+                        <canvas id="rect-canvas" class="nodisply"></canvas>
+                    </div>
+                    <div id="qrreaded" class="nodisply">
+                        <img src="https://placehold.jp/30/3d4070/ffffff/640x480.png?text=QRコードを読み取りました。%0A下の入力欄にデータを入力し，%0A右の場所で景品を選択し，%0A景品を譲渡してください。"
+                            alt="" srcset="">
+                    </div>
+                    <div class="roading nodisply" id="roading">QRコードを読み取りました。サーバーから情報を取得し，情報が表示されます。</div>
+                </center>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td>読込値</td>
+                                <td>入力</td>
+
+                            </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                        <tbody>
+                            <tr>
+                                <td>チケットID</td>
+                                <td colspan="2" id="r_tiket">xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</td>
+                            </tr>
+                            <tr>
+                                <td>飛距離記録</td>
+                                <td id="r_distance"></td>
+                                <td><input class="input" id="w_distance"></td>
+                            </tr>
+                            <tr>
+                                <td>日替種目種別</td>
+                                <td id="r_daycom"></td>
+                                <td>
+                                    <div class="select">
+                                        <select id="w_daycom">
+                                            <option value="1">クレー射撃だったもの</option>
+                                            <option value="2">カーリング</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>日替種目点数</td>
+                                <td id="r_daycomrenge"></td>
+
+                                <td><input class="input" id="w_daycomrenge"></td>
+                            </tr>
+
+                            <tr>
+                                <td>景品譲渡有無</td>
+                                <td id="r_rzgive"></td>
+
+                                <td><!--<div class="select">
+                                    <select id="rzgive">
+                                        <option value="true">はい</option>
+                                        <option value="false">いいえ</option>
+                                    </select>  -->
+                                    編集不可
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+            </div>
+            <div class="column ">
+                <article class="message">
+                    <div class="message-header">
+                        <p>景品一覧</p>
+                    </div>
+                    <div class="message-body">
+                        <button class="button m-3" id="przbtn1" onclick="selectprzbtn(1)">
+                            <div class="p-0">
+                                <div class="columns">
+                                    <div class="column">
+                                    </div>
+                                    <div class="column title mb-0">景品①</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="button m-3" id="przbtn2" onclick="selectprzbtn(2)">
+                            <div class="p-0">
+                                <div class="columns">
+                                    <div class="column">
+                                    </div>
+                                    <div class="column title mb-0">景品②</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="button m-3" id="przbtn3" onclick="selectprzbtn(3)">
+                            <div class="p-0">
+                                <div class="columns">
+                                    <div class="column">
+                                    </div>
+                                    <div class="column title mb-0">景品③
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="button m-3" id="przbtn4" onclick="selectprzbtn(4)">
+                            <div class="p-0">
+                                <div class="columns">
+                                    <div class="column">
+                                    </div>
+                                    <div class="column title mb-0">景品④</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="button m-3" id="przbtn5" onclick="selectprzbtn(5)">
+                            <div class="p-0">
+                                <div class="columns">
+                                    <div class="column">
+                                    </div>
+                                    <div class="column title mb-0">景品⑤</div>
+                                </div>
+                            </div>
+                        </button>
+
+                        <button class="button m-3" id="przbtn6" onclick="selectprzbtn(6)">
+                            <div class="p-0">
+                                <div class="columns">
+                                    <div class="column">
+                                    </div>
+                                    <div class="column title mb-0">景品⑥</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="button m-3" id="przbtn7" onclick="selectprzbtn(7)">
+                            <div class="p-0">
+                                <div class="columns">
+                                    <div class="column">
+                                    </div>
+                                    <div class="column title mb-0">景品⑦</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="button m-3" id="przbtn8" onclick="selectprzbtn(8)">
+                            <div class="p-0">
+                                <div class="columns">
+                                    <div class="column">
+                                    </div>
+                                    <div class="column title mb-0">景品⑧</div>
+                                </div>
+                            </div>
+                        </button>
+
+
+
+
+                    </div>
+                </article>
+                <div class=" m-3">
+
+                    <button class="button  is-medium has-background-link" id="addjpblist_btn" onclick="addjoblist()">
+                        <div class="" id="addjpblist">景品譲渡</div>
+                    </button>
+                    <button class="button is-medium" onclick="frontreset()">
+                        <div class="">キャンセル</div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="column ">
+
+                <article class="message">
+                    <div class="message-header">
+                        <p>送信待機ジョブ一覧</p>
+                        <a onclick="restjobsend()">待機ジョブ送信</a>
+                    </div>
+                    <div class="message-body stayjoblist" id="joblist">
+                        <!-- 
+                        <div class="box">
+                            <div class="columns">
+                                <div class="column title mb-0">景①</div>
+                                <div class="column">JobID:001<br>JobGroup:001</div>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                </article>
+                <div>
+                    <p class=""><strong>システムメッセージ</strong></p>
+                    <p class="scroll" id=""><span id="sysmsg">システムメッセージ</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="./script.js"></script>
+
+</html>
