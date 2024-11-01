@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="section">
+        <p class="has-text-centerd title pb-3">飛距離ランキング！</p>
+        <p class="subtitle">上位5位が表示されます！<br>
+            最大2分の遅れで表示されます。</p>
+        <div class="" id="roading">
+            <progress class="progress is-small is-primary" max="100">15%</progress>
+            <div class="has-text-centerd">
+                <p>読込中</p>
+            </div>
+        </div>
+        <div class="" id="rankings">
+            <div class="columns  is-vcentered">
+                <p class="title has-text-centered mb-0 column is-one-quarter has-text-right	" id="">
+                    <span class="pr-3">1位</span><span id="1_wname">000m</span>
+                </p>
+                <div class="bar-graph-wrap column">
+                    <div class="graph" style="" id="1_gtag">
+                        <span class="name" id="1_rank">1位</span>
+                        <span class="number" id="1_num"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="columns  is-vcentered">
+                <p class="title has-text-centered mb-0 column is-one-quarter has-text-right	" id="">
+                    <span class="pr-3">2位</span><span id="2_wname">000m</span>
+                </p>
+                <div class="bar-graph-wrap column">
+                    <div class="graph" style="" id="2_gtag">
+                        <span class="name" id="2_rank">2位</span>
+                        <span class="number" id="2_num"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="columns  is-vcentered">
+                <p class="title has-text-centered mb-0 column is-one-quarter has-text-right	" id="">
+                    <span class="pr-3">3位</span><span id="3_wname">000m</span>
+                </p>
+                <div class="bar-graph-wrap column">
+                    <div class="graph" style="" id="3_gtag">
+                        <span class="name" id="3_rank">3位</span>
+                        <span class="number" id="3_num"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="columns  is-vcentered">
+                <p class="title has-text-centered mb-0 column is-one-quarter has-text-right	" id="">
+                    <span class="pr-3">4位</span><span id="4_wname">000m</span>
+                </p>
+                <div class="bar-graph-wrap column">
+                    <div class="graph" style="" id="4_gtag">
+                        <span class="name" id="4_rank">4位</span>
+                        <span class="number" id="4_num"></span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="columns  is-vcentered">
+                <p class="title has-text-centered mb-0 column is-one-quarter has-text-right	" id="">
+                    <span class="pr-3">5位</span><span id="5_wname">000m</span>
+                </p>
+                <div class="bar-graph-wrap column">
+                    <div class="graph" style="" id="5_gtag">
+                        <span class="name" id="5_rank">5位</span>
+                        <span class="number" id="5_num"></span>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+    </section>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
