@@ -227,7 +227,7 @@ function selectprzbtn(przno) {
 }
 
 function newjobg() {//jobグループ
-    if (tmpjobg.length % 5 == 0) {
+    if (tmpjobg.length % 2 == 0) {
         jobgnam = jobgnam + 1;
         console.log(`newjobgr${jobgnam}`)
     } else {
@@ -313,7 +313,7 @@ function judpost() {
     tmpprz.jobg = null
     tmpprz.jobid = null
 
-    if (tmpjobg.length >= 5) {
+    if (tmpjobg.length >= 2) {
         postForm(JSON.stringify(tmpjobg));
         tmpjobg.splice(0);
         return 'startpost'
