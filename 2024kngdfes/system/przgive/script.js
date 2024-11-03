@@ -111,9 +111,12 @@ function gettiketdata(tiketid) {
     };
 }
 async function postForm(v) {
+        console.log('senddata-st')
 
+console.log(v)
+    console.log(new Date())
     console.log(JSON.parse(v))
-    console.log('senddata')
+    console.log('senddata-end')
     var postjobg = (JSON.parse(v))[0].jobg;//vからジョブグループ取得1;
     syslog(`ジョブグループ[${postjobg}]データ送信中`)
 
