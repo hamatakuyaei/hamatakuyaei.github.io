@@ -1,0 +1,91 @@
+:root {
+    --percent: 100%;
+    --g_color: #03a9f4;
+}
+
+.bar-graph-wrap {
+    position: relative;
+    height: 100px;
+    /*box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);*/
+}
+
+.bar-graph-wrap .graph {
+    height: calc(2rem + 20px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: var(--g_color);
+    width: var(--percent);
+    border-radius: 0 4px 4px 0;
+}
+
+.graph span {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.bar-graph-wrap .graph {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+}
+
+.bar-graph-wrap .graph {
+    animation: graphAnim 3s forwards;
+}
+
+@keyframes graphAnim {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.bar-graph-wrap {
+    overflow: hidden;
+}
+
+.bar-graph-wrap.vertical {
+    height: 500px;
+    margin: 0 auto;
+    max-width: 88px;
+}
+
+.bar-graph-wrap.vertical .graph {
+    width: 60px;
+    bottom: 0;
+    border-radius: 4px 4px 0 0;
+    animation: graphAnim02 3s forwards;
+    flex-direction: column-reverse;
+}
+
+.bar-graph-wrap.vertical .graph .name {
+    font-size: 10px;
+}
+
+.bar-graph-wrap.vertical .graph {
+    left: 15%;
+    height: var(--percent);
+    top: auto;
+}
+
+@keyframes graphAnim02 {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.nodis {
+    display: none;
+}
