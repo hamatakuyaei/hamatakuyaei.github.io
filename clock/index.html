@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>時計</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <style>
+        /*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
+
+        * {
+            margin: 0
+        }
+
+        @media (prefers-reduced-motion:no-preference) {
+            html {
+                interpolate-size: allow-keywords
+            }
+        }
+
+        body {
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        img,
+        picture,
+        video,
+        canvas,
+        svg {
+            display: block;
+            max-width: 100%
+        }
+
+        input,
+        button,
+        textarea,
+        select {
+            font: inherit
+        }
+
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            overflow-wrap: break-word
+        }
+
+        p {
+            text-wrap: pretty
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            text-wrap: balance
+        }
+
+        #root,
+        #__next {
+            isolation: isolate
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock-container">
+        <div class="time-display">
+            <h2 class="jp-font">日本標準時 (JST)</h2>
+            <div id="jst-time" class="seven-segment"></div>
+        </div>
+        <div class="time-display">
+            <h2 class="jp-font">世界標準時 (UTC)</h2>
+            <div id="utc-time" class="seven-segment"></div>
+        </div>
+        <div class="time-display pb-0">
+            <h2 class="jp-font">UNIX Time</h2>
+            <div id="unix-time" class="seven-segment"></div>
+        </div>
+        <div id="sync-status" style="display: none;">
+            NICT時刻サーバーと同期中...
+        </div>
+        <button id="time-signal-button">時報を有効にする</button>
+    </div>
+
+    <style>
+        @font-face {
+            font-family: 'DSEG7';
+            src: url('./DSEG7ClassicMini-Italic.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        #clock-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #000;
+            color: #fff;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .time-display {
+            margin: 0;
+            color: #fff;
+            text-align: center;
+            width: 100%;
+            padding-bottom: 50px;
+        }
+
+        .time-display .jp {
+            font-family: 'Kosugi Maru', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            color: #d0d0d0;
+        }
+
+        .time-display h2 {
+            margin: 0;
+            padding: 0px 0;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #000000;
+            width: 100vw;
+            background-color: #ffffff;
+        }
+
+        .seven-segment {
+            width: 100vw;
+            font-family: 'DSEG7', monospace;
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #000000;
+            padding: 15px 10px;
+            border-radius: 0px;
+            border: 2px solid #000000;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+            word-break: break-all;
+            white-space: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .seven-segment::-webkit-scrollbar {
+            display: none;
+        }
+
+        .jp-font {
+            font-family: 'Kosugi Maru', sans-serif;
+            color: #000000;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin: 0;
+            padding: 0;
+        }
+
+        #sync-status {
+            color: #888;
+            text-align: center;
+            margin-top: 15px;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            padding: 0 20px;
+            word-break: break-word;
+        }
+
+        #time-signal-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-family: 'Kosugi Maru', sans-serif;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        #time-signal-button:hover {
+            background-color: #555;
+        }
+
+
+        /* タブレット用（768px以下） */
+        @media (max-width: 768px) {
+            #clock-container {
+                padding: 0;
+            }
+
+            .time-display {
+                margin: 0;
+            }
+
+            .seven-segment {
+                padding: 12px 8px;
+                font-size: clamp(1.8rem, 5vw, 3.5rem);
+            }
+
+            .time-display h2 {
+                padding: 0px 0;
+                margin: 0;
+            }
+
+            .jp-font {
+                padding: 0;
+                margin: 0;
+            }
+        }
+
+        /* スマートフォン用（480px以下） */
+        @media (max-width: 480px) {
+            #clock-container {
+                padding: 0;
+                justify-content: flex-start;
+            }
+
+            .time-display {
+                margin: 0;
+                padding-bottom: 30px;
+            }
+
+            .seven-segment {
+                padding: 10px 5px;
+                font-size: clamp(1.5rem, 4.5vw, 2.5rem);
+                letter-spacing: 0.02em;
+            }
+
+            .time-display h2 {
+                padding: 0;
+                margin: 0;
+                font-size: clamp(1rem, 2.5vw, 1.5rem);
+            }
+
+            .jp-font {
+                padding: 0;
+                margin: 0;
+            }
+
+            .time-display .jp {
+                font-size: clamp(1.2rem, 3vw, 2rem);
+            }
+
+            #sync-status {
+                margin-top: 10px;
+                font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+                padding: 0 15px;
+            }
+
+            #time-signal-button {
+                margin-top: 15px;
+                padding: 8px 15px;
+            }
+        }
+
+        /* 超小型デバイス用（320px以下） */
+        @media (max-width: 320px) {
+            .seven-segment {
+                font-size: clamp(1.2rem, 4vw, 2rem);
+                padding: 8px 3px;
+            }
+
+            .time-display h2 {
+                font-size: clamp(0.9rem, 2.2vw, 1.3rem);
+                padding: 0;
+                margin: 0;
+            }
+
+            .jp-font {
+                padding: 0;
+                margin: 0;
+            }
+
+            #sync-status {
+                font-size: clamp(0.5rem, 1.5vw, 0.7rem);
+            }
+        }
+
+        /* 横向き対応 */
+        @media (max-height: 600px) and (orientation: landscape) {
+            #clock-container {
+                padding: 0;
+            }
+
+            .time-display {
+                margin: 0;
+                padding-bottom: 30px;
+            }
+
+            .time-display h2 {
+                padding: 0px 0;
+                margin: 0;
+            }
+
+            .jp-font {
+                padding: 0px 0;
+                margin: 0;
+            }
+
+            .seven-segment {
+                padding: 5px;
+            }
+
+            #sync-status {
+                margin-top: 5px;
+            }
+
+            #time-signal-button {
+                margin-top: 10px;
+                padding: 5px 10px;
+                font-size: clamp(0.8rem, 2vw, 1rem);
+            }
+        }
+
+        /* ダークモード対応 */
+        @media (prefers-color-scheme: dark) {
+            #clock-container {
+                background-color: #000;
+            }
+        }
+
+        /* 高コントラスト対応 */
+        @media (prefers-contrast: high) {
+            .seven-segment {
+                border: 3px solid #333;
+            }
+
+            .time-display h2 {
+                background-color: #fff;
+                color: #000;
+            }
+
+            #time-signal-button {
+                border: 2px solid #fff;
+            }
+        }
+
+        /* モーション軽減対応 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* タッチデバイス用の改善 */
+        @media (hover: none) and (pointer: coarse) {
+            .seven-segment {
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+        }
+
+        .pb-0 {
+            padding-bottom: 0 !important;
+        }
+    </style>
+    <script>
+        let timeOffset = 0; // サーバーとクライアントの時差
+        let lastSyncTime = 0; // 最後に同期した時刻
+        let syncInterval = null;
+
+        // Tone.js related variables
+        let synth;
+        let timeSignalEnabled = false;
+        let lastBeepSecond = -1; // To prevent multiple beeps for the same second
+
+        // NICT時刻サーバーから時刻を取得してオフセットを計算
+        async function syncWithNICT() {
+            try {
+                const requestStart = Date.now();
+                const response = await fetch('https://67495dde3b39c2991829589f0101ab7a035eecf5.nict.go.jp/cgi-bin/json');
+                const requestEnd = Date.now();
+
+                if (!response.ok) {
+                    throw new Error('NICT時刻サーバーとの通信に失敗しました');
+                }
+
+                const data = await response.json();
+                const networkDelay = (requestEnd - requestStart) / 2; // ネットワーク遅延の推定
+
+                const serverTime = (data.st * 1000) + networkDelay;
+                const clientTime = Date.now();
+
+                timeOffset = serverTime - clientTime;
+                lastSyncTime = clientTime;
+
+                document.getElementById('sync-status').textContent =
+                    `NICT同期完了: ${new Date(lastSyncTime).toLocaleTimeString()} (オフセット: ${timeOffset.toFixed(0)}ms)`;
+                document.getElementById('sync-status').style.display = 'block';
+
+
+                console.log(`NICT時刻サーバーと同期完了。オフセット: ${timeOffset}ms`);
+
+            } catch (error) {
+                console.error('NICT時刻サーバーとの同期に失敗:', error);
+                document.getElementById('sync-status').textContent =
+                    `同期エラー: ${error.message}`;
+                document.getElementById('sync-status').style.display = 'block';
+            }
+        }
+
+        // 現在の正確な時刻を取得（NICTオフセットを考慮）
+        function getAccurateTime() {
+            return new Date(Date.now() + timeOffset);
+        }
+
+        // Function to play a beep for the time signal
+        function playBeep(baseNote, duration) {
+            if (!synth || !timeSignalEnabled) { // Early exit if synth not ready or signal disabled
+                return;
+            }
+
+            // Determine the note to play
+            let noteToPlay = baseNote;
+            const now = getAccurateTime(); // Get current accurate time internally
+            const jstTimeForBeep = new Date(now.getTime() + (9 * 60 * 60 * 1000)); // Calculate JST
+            const secondsForBeep = jstTimeForBeep.getUTCSeconds();
+
+            if (secondsForBeep === 0) { // Check if it's the start of a new minute (second 0)
+                const match = baseNote.match(/([A-G][#b]?)([0-9]+)/); // Regex to parse note and octave
+                if (match && match.length === 3) {
+                    const noteName = match[1];
+                    const octaveNumber = parseInt(match[2], 10);
+                    noteToPlay = `${noteName}${octaveNumber + 1}`; // Construct note one octave higher
+                } else {
+                    // Fallback if baseNote format is unexpected or unparsable
+                    // Play the original note and log a warning.
+                    console.warn(`playBeep: Could not parse note "${baseNote}" to raise octave. Playing original note.`);
+                    noteToPlay = baseNote;
+                }
+            }
+
+            // Use setTimeout to ensure this operation does not block the main thread
+            // and delay the visual update of the clock.
+            setTimeout(() => {
+                // Re-check synth and timeSignalEnabled in case the state changed
+                // between scheduling and execution of this timeout.
+                if (synth && timeSignalEnabled) {
+                    synth.triggerAttackRelease(noteToPlay, duration, Tone.now());
+                }
+            }, 0);
+        }
+
+        function updateTime() {
+            const now = getAccurateTime();
+
+            // JST (UTC+9)
+            const jstTime = new Date(now.getTime() + (9 * 60 * 60 * 1000));
+            const jstYear = jstTime.getUTCFullYear();
+            const jstMonth = String(jstTime.getUTCMonth() + 1).padStart(2, '!');
+            const jstDate = String(jstTime.getUTCDate()).padStart(2, '!');
+            const jstHours = String(jstTime.getUTCHours()).padStart(2, '!');
+            const jstMinutes = String(jstTime.getUTCMinutes()).padStart(2, '!');
+            const jstSeconds = String(jstTime.getUTCSeconds()).padStart(2, '!');
+
+            // UTC
+            const utcYear = now.getUTCFullYear();
+            const utcMonth = String(now.getUTCMonth() + 1).padStart(2, '!');
+            const utcDate = String(now.getUTCDate()).padStart(2, '!');
+            const utcHours = String(now.getUTCHours()).padStart(2, '!');
+            const utcMinutes = String(now.getUTCMinutes()).padStart(2, '!');
+            const utcSeconds = String(now.getUTCSeconds()).padStart(2, '!');
+
+            // UNIX Time (秒単位)
+            const unixTimeSeconds = Math.floor(now.getTime() / 1000);
+
+            document.getElementById('jst-time').innerHTML = `${jstYear}<span class="jp">年</span>${jstMonth}<span
+        class="jp">月</span>${jstDate}<span class="jp">日</span>${jstHours}<span class="jp">時</span>${jstMinutes}<span
+        class="jp">分</span>${jstSeconds}<span class="jp">秒</span>`;
+
+            document.getElementById('utc-time').innerHTML = `${utcYear}<span class="jp">年</span>${utcMonth}<span
+        class="jp">月</span>${utcDate}<span class="jp">日</span>${utcHours}<span class="jp">時</span>${utcMinutes}<span
+        class="jp">分</span>${utcSeconds}<span class="jp">秒</span>`;
+
+            document.getElementById('unix-time').innerHTML = `${unixTimeSeconds}<span class="jp">秒</span>`;
+
+            // Time signal logic (JST based)
+            if (timeSignalEnabled) {
+                const currentJSTSeconds = jstTime.getUTCSeconds();
+                if (currentJSTSeconds !== lastBeepSecond) {
+                    playBeep("A4", "0.05s"); // 440 Hz, short beep
+                    lastBeepSecond = currentJSTSeconds;
+                }
+            }
+        }
+
+        // Toggle time signal
+        async function toggleTimeSignal() {
+            if (!timeSignalEnabled) {
+                // Enable
+                if (Tone.context.state !== 'running') {
+                    try {
+                        await Tone.start();
+                        console.log('AudioContext started for time signal.');
+                    } catch (e) {
+                        console.error("Error starting Tone.js:", e);
+                        alert("ブラウザの制限により音声を開始できませんでした。ページを操作してから再度お試しください。");
+                        return;
+                    }
+                }
+                if (!synth) {
+                    synth = new Tone.Synth({
+                        oscillator: { type: 'sine' },
+                        envelope: {
+                            attack: 0.005,
+                            decay: 0.1,
+                            sustain: 0.01,
+                            release: 0.1
+                        }
+                    }).toDestination();
+                }
+                timeSignalEnabled = true;
+                document.getElementById('time-signal-button').textContent = '時報を無効にする';
+                console.log('Time signal enabled.');
+                lastBeepSecond = -1; // Reset on enable
+            } else {
+                // Disable
+                timeSignalEnabled = false;
+                document.getElementById('time-signal-button').textContent = '時報を有効にする';
+                console.log('Time signal disabled.');
+            }
+        }
+
+
+        // 初期化処理
+        async function init() {
+            // 初回同期
+            await syncWithNICT();
+
+            // 時計の更新開始
+            updateTime();
+            setInterval(updateTime, 10); // 100ms間隔で更新して秒の変わり目を捉えやすくする
+
+            // 定期的にNICT時刻サーバーと同期（30秒ごと）
+            syncInterval = setInterval(syncWithNICT, 10000);
+
+            // Add event listener for the time signal button
+            const timeSignalButton = document.getElementById('time-signal-button');
+            if (timeSignalButton) {
+                timeSignalButton.addEventListener('click', toggleTimeSignal);
+            }
+        }
+
+        // ページロード時に初期化
+        init();
+
+        // ページがフォーカスを取り戻した時に再同期
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                syncWithNICT();
+            }
+        });
+
+        // オリエンテーション変更時の対応
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                // レイアウトの再計算を強制
+                const container = document.getElementById('clock-container');
+                container.style.minHeight = '100vh';
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>
